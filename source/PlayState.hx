@@ -421,7 +421,7 @@ class PlayState extends MusicBeatState
 		debugKeysCharacter = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_2'));
 
 		dodgeKey = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('qt_dodge')) #if android || androidControls.hitbox.buttonDodge.justPressed #end;
-		tauntKey = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('qt_taunt')) #if android || androidControls.hitbox.buttonTaunt.justPressed #end;
+		tauntKey = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('qt_taunt'));
 
 		Achievements.loadAchievements();
 
@@ -6702,7 +6702,7 @@ class PlayState extends MusicBeatState
 		if (SONG.dodgeEnabled)
 		{
 			// FlxG.keys.justPressed.SPACE
-			if (FlxG.keys.anyJustPressed(dodgeKey) && !bfDodging && bfCanDodge)
+			if ((FlxG.keys.anyJustPressed(dodgeKey) #if android || androidControls.hitbox.buttonDodge.justPressed #end) && !bfDodging && bfCanDodge)
 			{
 				bfDodge();
 			}
@@ -6750,7 +6750,7 @@ class PlayState extends MusicBeatState
 			// Fuck you, I added a taunt button because it's funny! -Haz
 			// FlxG.keys.justPressed.SHIFT
 			if (!inhumanSong
-				&& FlxG.keys.anyJustPressed(tauntKey)
+				&& (FlxG.keys.anyJustPressed(tauntKey) #if android || androidControls.hitbox.buttonTaunt.justPressed #end)
 				&& !bfDodging
 				&& !controlHoldArray.contains(true)
 				&& !boyfriend.animation.curAnim.name.endsWith('miss')
