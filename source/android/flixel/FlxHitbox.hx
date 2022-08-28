@@ -21,6 +21,8 @@ class FlxHitbox extends FlxSpriteGroup
 	public var buttonDown:FlxButton = new FlxButton(0, 0);
 	public var buttonUp:FlxButton = new FlxButton(0, 0);
 	public var buttonRight:FlxButton = new FlxButton(0, 0);
+        public var buttonTaunt:FlxButton = new FlxButton(0, 0);
+        public var buttonDodge:FlxButton = new FlxButton(0, 0);
 
 	/**
 	 * Create the zone.
@@ -29,11 +31,29 @@ class FlxHitbox extends FlxSpriteGroup
 	{
 		super();
 
-		add(buttonLeft = createHint(0, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF00FF));
-		add(buttonDown = createHint(FlxG.width / 4, 0, Std.int(FlxG.width / 4), FlxG.height, 0x00FFFF));
-		add(buttonUp = createHint(FlxG.width / 2, 0, Std.int(FlxG.width / 4), FlxG.height, 0x00FF00));
-		add(buttonRight = createHint((FlxG.width / 2) + (FlxG.width / 4), 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF0000));
+                final offsetFir:Int = (FlxG.save.data.mechsInputVariants ? Std.int(FlxG.height / 4) * 3 : 0);
+		final offsetSec:Int = (FlxG.save.data.mechsInputVariants ? 0 : Std.int(FlxG.height / 4));
 
+                switch (mode) {
+                        case DEFAULT:
+		                add(buttonLeft = createHint(0, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF00FF));
+		                add(buttonDown = createHint(FlxG.width / 4, 0, Std.int(FlxG.width / 4), FlxG.height, 0x00FFFF));
+		                add(buttonUp = createHint(FlxG.width / 2, 0, Std.int(FlxG.width / 4), FlxG.height, 0x00FF00));
+		                add(buttonRight = createHint((FlxG.width / 2) + (FlxG.width / 4), 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF0000));
+                        case TAUNT:
+                                add(buttonLeft = createHint(0, offsetSec, Std.int(FlxG.width / 4), FlxG.height, 0xFF00FF));
+		                add(buttonDown = createHint(FlxG.width / 4, offsetSec, Std.int(FlxG.width / 4), FlxG.height, 0x00FFFF));
+		                add(buttonUp = createHint(FlxG.width / 2, offsetSec, Std.int(FlxG.width / 4), FlxG.height, 0x00FF00));
+		                add(buttonRight = createHint((FlxG.width / 2) + (FlxG.width / 4), offsetSec, Std.int(FlxG.width / 4), FlxG.height, 0xFF0000));
+                                add(buttonTaunt = createHint(0, offsetFir, FlxG.width, Std.int(FlxG.height / 4), 0xFF00B3));
+                        case DOUBLE:
+                                add(buttonLeft = createHint(0, offsetSec, Std.int(FlxG.width / 4), 540, 0xFF00FF));
+				add(buttonDown = createHint(FlxG.width / 4, offsetSec, Std.int(FlxG.width / 4), 540, 0x00FFFF));
+				add(buttonUp = createHint(FlxG.width / 2, offsetSec, Std.int(FlxG.width / 4), 540, 0x00FF00));
+				add(buttonRight = createHint((FlxG.width / 2) + (FlxG.width / 4), offsetSec, Std.int(FlxG.width / 4), 540, 0xFF0000));
+				add(buttonDodge = createHint(Std.int(FlxG.width / 2), offsetFir, Std.int(FlxG.width / 2), Std.int(FlxG.height / 4), 0xFFFF00));
+				add(buttonTaunt = createHint(0, offsetFir, Std.int(FlxG.width / 2), Std.int(FlxG.height / 4), 0xFF00B3));
+                }
 		scrollFactor.set();
 	}
 
@@ -119,6 +139,7 @@ class FlxHitbox extends FlxSpriteGroup
 }
 
 enum Modes {
+        DEFAULT;
         TAUNT;
         DOUBLE;
 }
