@@ -69,8 +69,8 @@ class Paths
 						currentTrackedTextures.remove(key);
 					}
 					openfl.Assets.cache.removeBitmapData(key);
-                                        Openfl.Assets.cache.clearBitmapData(key);
-					Openfl.Assets.cache.clear(key);
+                                        openfl.Assets.cache.clearBitmapData(key);
+					openfl.Assets.cache.clear(key);
 					FlxG.bitmap._cache.remove(key);
 					obj.destroy();
 					currentTrackedAssets.remove(key);
@@ -94,6 +94,8 @@ class Paths
 			if (obj != null && !currentTrackedAssets.exists(key))
 			{
 				openfl.Assets.cache.removeBitmapData(key);
+                                openfl.Assets.cache.clearBitmapData(key);
+				openfl.Assets.cache.clear(key);
 				FlxG.bitmap._cache.remove(key);
 				obj.destroy();
 			}
@@ -104,10 +106,21 @@ class Paths
 		{
 			if (!localTrackedAssets.contains(key) && !dumpExclusions.contains(key) && key != null)
 			{
-				Assets.cache.clear(key);
+				// Assets.cache.clear(key);
+                                OpenFlAssets.cache.removeSound(key);
+				OpenFlAssets.cache.clearSounds(key);
 				currentTrackedSounds.remove(key);
 			}
 		}
+
+                for (key in OpenFlAssets.cache.getKeys())
+		{
+			if (!localTrackedAssets.contains(key) && key != null)
+			{
+				OpenFlAssets.cache.clear(key);
+			}
+		}
+
 		// flags everything to be cleared out next unused memory clear
 		localTrackedAssets = [];
 		openfl.Assets.cache.clear("songs");
