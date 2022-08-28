@@ -236,10 +236,10 @@ class Paths
 		return inst;
 	}
 
-	inline static public function image(key:String, ?library:String):FlxGraphic
+	inline static public function image(key:String, ?library:String, ?gpurender:Bool = false):FlxGraphic
 	{
 		// streamlined the assets process more
-		var returnAsset:FlxGraphic = returnGraphic(key, library);
+		var returnAsset:FlxGraphic = returnGraphic(key, library, gpurender);
 		return returnAsset;
 	}
 
@@ -301,34 +301,34 @@ class Paths
 	inline static public function getSparrowAtlas(key:String, ?library:String):FlxAtlasFrames
 	{
 		#if MODS_ALLOWED
-		var imageLoaded:FlxGraphic = returnGraphic(key);
+		var imageLoaded:FlxGraphic = returnGraphic(key, null, true);
 		var xmlExists:Bool = false;
 		if (FileSystem.exists(modsXml(key)))
 		{
 			xmlExists = true;
 		}
 
-		return FlxAtlasFrames.fromSparrow((imageLoaded != null ? imageLoaded : image(key, library)),
+		return FlxAtlasFrames.fromSparrow((imageLoaded != null ? imageLoaded : image(key, library, true)),
 			(xmlExists ? File.getContent(modsXml(key)) : file('images/$key.xml', library)));
 		#else
-		return FlxAtlasFrames.fromSparrow(image(key, library), file('images/$key.xml', library));
+		return FlxAtlasFrames.fromSparrow(image(key, library, true), file('images/$key.xml', library));
 		#end
 	}
 
 	inline static public function getPackerAtlas(key:String, ?library:String)
 	{
 		#if MODS_ALLOWED
-		var imageLoaded:FlxGraphic = returnGraphic(key);
+		var imageLoaded:FlxGraphic = returnGraphic(key, null, true);
 		var txtExists:Bool = false;
 		if (FileSystem.exists(modsTxt(key)))
 		{
 			txtExists = true;
 		}
 
-		return FlxAtlasFrames.fromSpriteSheetPacker((imageLoaded != null ? imageLoaded : image(key, library)),
+		return FlxAtlasFrames.fromSpriteSheetPacker((imageLoaded != null ? imageLoaded : image(key, library, true)),
 			(txtExists ? File.getContent(modsTxt(key)) : file('images/$key.txt', library)));
 		#else
-		return FlxAtlasFrames.fromSpriteSheetPacker(image(key, library), file('images/$key.txt', library));
+		return FlxAtlasFrames.fromSpriteSheetPacker(image(key, library, true), file('images/$key.txt', library));
 		#end
 	}
 
@@ -340,7 +340,7 @@ class Paths
 	// completely rewritten asset loading? fuck!
 	public static var currentTrackedAssets:Map<String, FlxGraphic> = [];
 
-	public static function returnGraphic(key:String, ?library:String)
+	public static function returnGraphic(key:String, ?library:String, ?gpurender:Bool = false)
 	{
 		#if MODS_ALLOWED
 		if (FileSystem.exists(modsImages(key)))
@@ -348,26 +348,81 @@ class Paths
 			if (!currentTrackedAssets.exists(key))
 			{
 				var newBitmap:BitmapData = BitmapData.fromFile(modsImages(key));
-				var newGraphic:FlxGraphic = FlxGraphic.fromBitmapData(newBitmap, false, key);
+				var newGraphic:FlxGraphic = null;
 				FlxGraphic.defaultPersist = true;
+				if (gpurender)
+				{
+					switch (ClientPrefs.render)
+					{
+						case 1:
+							var texture = FlxG.stage.context3D.createTexture(bitmap.width, bitmap.height, BGRA, true);
+							texture.uploadFromBitmapData(bitmap);
+							currentTrackedTextures.set(key, texture);
+							bitmap.dispose();
+							bitmap.disposeImage();
+							bitmap = null;
+							newGraphic = FlxGraphic.fromBitmapData(BitmapData.fromTexture(texture), false, path);
+						case 2:
+							var texture = Lib.current.stage.context3D.createTexture(bitmap.width, bitmap.height, BGRA, true);
+							texture.uploadFromBitmapData(bitmap);
+							currentTrackedTextures.set(key, texture);
+							bitmap.dispose();
+							bitmap.disposeImage();
+							bitmap = null;
+							newGraphic = FlxGraphic.fromBitmapData(BitmapData.fromTexture(texture), false, path);
+						default:
+							newGraphic = FlxGraphic.fromBitmapData(bitmap, false, path);
+					}
+				}
+				else
+					newGraphic = FlxGraphic.fromBitmapData(bitmap, false, path);
+
+				newGraphic.persist = true;
 				currentTrackedAssets.set(key, newGraphic);
+                                localTrackedAssets.push(key);
+		                return currentTrackedAssets.get(key);
 			}
-			localTrackedAssets.push(key);
-			return currentTrackedAssets.get(key);
 		}
 		#end
-		var path = getPath('images/$key.png', IMAGE, library);
-		if (OpenFlAssets.exists(path, IMAGE))
-		{
-			if (!currentTrackedAssets.exists(key))
+                var path = getPath('images/$key.png', IMAGE, library);
+                if (!currentTrackedAssets.exists(path) && OpenFlAssets.exists(path, IMAGE))
 			{
-				var newGraphic:FlxGraphic = FlxG.bitmap.add(path, false, key);
-				FlxGraphic.defaultPersist = true;
-				currentTrackedAssets.set(key, newGraphic);
+				var newGraphic:FlxGraphic = null;
+                                FlxGraphic.defaultPersist = true;
+				var bitmap:BitmapData = OpenFlAssets.getBitmapData(path);
+
+				if (gpurender)
+				{
+					switch (ClientPrefs.render)
+					{
+						case 1:
+							var texture = FlxG.stage.context3D.createTexture(bitmap.width, bitmap.height, BGRA, true);
+							texture.uploadFromBitmapData(bitmap);
+							currentTrackedTextures.set(path, texture);
+							bitmap.dispose();
+							bitmap.disposeImage();
+							bitmap = null;
+							newGraphic = FlxGraphic.fromBitmapData(BitmapData.fromTexture(texture), false, path);
+						case 2:
+							var texture = Lib.current.stage.context3D.createTexture(bitmap.width, bitmap.height, BGRA, true);
+							texture.uploadFromBitmapData(bitmap);
+							currentTrackedTextures.set(path, texture);
+							bitmap.dispose();
+							bitmap.disposeImage();
+							bitmap = null;
+							newGraphic = FlxGraphic.fromBitmapData(BitmapData.fromTexture(texture), false, path);
+						default:
+							newGraphic = FlxGraphic.fromBitmapData(bitmap, false, path);
+					}
+				}
+				else
+					newGraphic = FlxGraphic.fromBitmapData(bitmap, false, path);
+
+				newGraphic.persist = true;
+				currentTrackedAssets.set(path, newGraphic);
+                                localTrackedAssets.push(path);
+		                return currentTrackedAssets.get(path);
 			}
-			localTrackedAssets.push(key);
-			return currentTrackedAssets.get(key);
-		}
 		trace('oh no its returning null NOOOO');
 		return null;
 	}
