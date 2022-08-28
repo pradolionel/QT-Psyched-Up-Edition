@@ -44,6 +44,11 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 			false); // Default value
 		addOption(option);
 
+                var option:Option = new Option('render', '1 - ram render, 2 - gpu flash render, 3 - gpu openfl render', 'render', 'int', 0);
+                option.minValue = 0;
+                option.maxValue = 2;
+                addOption(option);
+
 		var option:Option = new Option('Disable Shaders', // Name
 			'If checked, disables shaders from working.', // Description
 			'noShaders', // Save data variable name
