@@ -1,6 +1,7 @@
 package android;
 
 import android.flixel.FlxHitbox;
+import android.flixel.FlxHitbox.Modes;
 import android.flixel.FlxVirtualPad;
 import flixel.FlxG;
 import flixel.group.FlxSpriteGroup;
@@ -15,29 +16,12 @@ class AndroidControls extends FlxSpriteGroup
 	public var virtualPad:FlxVirtualPad;
 	public var hitbox:FlxHitbox;
 
-	public function new()
+	public function new(mode:Modes)
 	{
 		super();
 
-		switch (AndroidControls.getMode())
-		{
-			case 'Pad-Right':
-				virtualPad = new FlxVirtualPad(RIGHT_FULL, NONE);
-				add(virtualPad);
-			case 'Pad-Left':
-				virtualPad = new FlxVirtualPad(LEFT_FULL, NONE);
-				add(virtualPad);
-			case 'Pad-Custom':
-				virtualPad = AndroidControls.getCustomMode(new FlxVirtualPad(RIGHT_FULL, NONE));
-				add(virtualPad);
-			case 'Pad-Duo':
-				virtualPad = new FlxVirtualPad(BOTH_FULL, NONE);
-				add(virtualPad);
-			case 'Hitbox':
-				hitbox = new FlxHitbox();
-				add(hitbox);
-			case 'Keyboard': // do nothing
-		}
+		hitbox = new FlxHitbox(mode);
+		add(hitbox);
 	}
 
 	override public function destroy():Void
