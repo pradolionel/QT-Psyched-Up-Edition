@@ -20,6 +20,7 @@ import sys.FileSystem;
 import flixel.graphics.FlxGraphic;
 import openfl.display.BitmapData;
 import flash.media.Sound;
+import openfl.Lib;
 
 using StringTools;
 
