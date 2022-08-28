@@ -6,6 +6,7 @@ import android.flixel.FlxVirtualPad;
 import flixel.FlxCamera;
 import flixel.input.actions.FlxActionInput;
 import flixel.util.FlxDestroyUtil;
+import android.flixel.FlxHitbox.Modes;
 #end
 import Conductor.BPMChangeEvent;
 import flixel.FlxG;
@@ -59,20 +60,11 @@ class MusicBeatState extends FlxUIState
 			remove(virtualPad);
 	}
 
-	public function addAndroidControls()
+	public function addAndroidControls(mode:Modes)
 	{
-		androidControls = new AndroidControls();
+		androidControls = new AndroidControls(mode);
 
-		switch (AndroidControls.getMode())
-		{
-			case 'Pad-Right' | 'Pad-Left' | 'Pad-Custom':
-				controls.setVirtualPadNOTES(androidControls.virtualPad, RIGHT_FULL, NONE);
-			case 'Pad-Duo':
-				controls.setVirtualPadNOTES(androidControls.virtualPad, BOTH_FULL, NONE);
-			case 'Hitbox':
-				controls.setHitBox(androidControls.hitbox);
-			case 'Keyboard': // do nothing
-		}
+		controls.setHitBox(androidControls.hitbox);
 
 		trackedinputsNOTES = controls.trackedinputsNOTES;
 		controls.trackedinputsNOTES = [];
