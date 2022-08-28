@@ -25,7 +25,7 @@ class FlxHitbox extends FlxSpriteGroup
 	/**
 	 * Create the zone.
 	 */
-	public function new()
+	public function new(mode:Modes)
 	{
 		super();
 
@@ -116,4 +116,9 @@ class FlxHitbox extends FlxSpriteGroup
 		#end
 		return hint;
 	}
+}
+
+enum Modes {
+        TAUNT;
+        DOUBLE;
 }
