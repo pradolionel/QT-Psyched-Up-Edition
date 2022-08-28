@@ -30,7 +30,6 @@ using StringTools;
 class OptionsState extends MusicBeatState
 {
 	final options:Array<String> = [
-		#if android 'Android Controls', #end
 		'Note Colors',
 		'Controls',
 		'Adjust Delay and Combo',
@@ -52,10 +51,6 @@ class OptionsState extends MusicBeatState
 
 		switch (label)
 		{
-			#if android
-			case 'Android Controls':
-				openSubState(new android.AndroidControlsSubState());
-			#end
 			case 'Note Colors':
 				openSubState(new options.NotesSubState());
 			case 'Controls':
