@@ -27,7 +27,6 @@ using StringTools;
 
 class Paths
 {
-	public static var currentTrackedTextures:Map<String, Texture> = [];
 	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
 	inline public static var VIDEO_EXT = "mp4";
 
@@ -368,9 +367,6 @@ class Paths
 		return path.toLowerCase().replace(' ', '-');
 	}
 
-	// completely rewritten asset loading? fuck!
-	public static var currentTrackedAssets:Map<String, FlxGraphic> = [];
-
 	public static function returnGraphic(key:String, ?library:String, ?gpurender:Bool = false)
 	{
 		#if MODS_ALLOWED
@@ -461,8 +457,6 @@ class Paths
 		trace('oh no its returning null NOOOO');
 		return null;
 	}
-
-	public static var currentTrackedSounds:Map<String, Sound> = [];
 
 	public static function returnSound(path:String, key:String, ?library:String)
 	{
