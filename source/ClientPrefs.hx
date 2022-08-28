@@ -36,6 +36,7 @@ class ClientPrefs
 	public static var noReset:Bool = false;
 	public static var healthBarAlpha:Float = 1;
 	public static var controllerMode:Bool = #if android true #else false #end;
+        public static var mechsInputVariants = true;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative',
@@ -135,6 +136,7 @@ class ClientPrefs
 		FlxG.save.data.safeFrames = safeFrames;
 		FlxG.save.data.gameplaySettings = gameplaySettings;
 		FlxG.save.data.controllerMode = controllerMode;
+                FlxG.save.data.mechsInputVariants = mechsInputVariants;
 
 		FlxG.save.flush();
 
@@ -289,6 +291,10 @@ class ClientPrefs
 		{
 			controllerMode = FlxG.save.data.controllerMode;
 		}
+                if (FlxG.save.data.mechsInputVariants != null) {
+                {
+                        mechsInputVariants = FlxG.save.data.mechsInputVariants;
+                }
 		if (FlxG.save.data.gameplaySettings != null)
 		{
 			var savedMap:Map<String, Dynamic> = FlxG.save.data.gameplaySettings;
