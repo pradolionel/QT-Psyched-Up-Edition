@@ -1780,7 +1780,7 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
-			luaFile = Paths.getPreloadPath(luaFile);
+			luaFile = SUtil.getPath() + Paths.getPreloadPath(luaFile);
 			if (FileSystem.exists(luaFile))
 			{
 				doPush = true;
@@ -1928,30 +1928,21 @@ class PlayState extends MusicBeatState
 
 	public function startVideo(name:String):Void
 	{
-	#if VIDEOS_ALLOWED
-	var foundFile:Bool = false;
-	var fileName:String = #if MODS_ALLOWED Paths.modFolders('videos/' + name + '.' + Paths.VIDEO_EXT); #else ''; #end
-	#if sys
-	if (FileSystem.exists(fileName))
-	{
-		foundFile = true;
-	}
-	#end
+		#if VIDEOS_ALLOWED
+		var foundFile:Bool = false;
+		var fileName:String = Paths.video(name);
 
-	if (!foundFile)
-	{
-		fileName = Paths.video(name);
-		#if sys
-		if (FileSystem.exists(fileName))
+		if (!foundFile)
 		{
-		#else
-		if (OpenFlAssets.exists(fileName))
-		{
-		#end
-			foundFile = true;
+			#if MODS_ALLOWED
+			if (FileSystem.exists(fileName))
+			#else
+			if (OpenFlAssets.exists(fileName))
+			#end
+				foundFile = true;
 		}
-		} if (foundFile)
 
+		if (foundFile)
 		{
 			inCutscene = true;
 			var bg = new FlxSprite(-FlxG.width, -FlxG.height).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
@@ -1959,11 +1950,13 @@ class PlayState extends MusicBeatState
 			bg.cameras = [camHUD];
 			add(bg);
 
-			(new FlxVideo(fileName)).finishCallback = function()
+			var video:VideoHandler = new VideoHandler();
+			video.finishCallback = function()
 			{
 				remove(bg);
 				startAndEnd();
 			}
+			video.playVideo(fileName);
 			return;
 		}
 		else
@@ -1980,7 +1973,6 @@ class PlayState extends MusicBeatState
 		if (endingSong)
 		{
 			endSong();
-			// trace("EndSong triggerd from Start And End");
 		}
 		else
 			startCountdown();
