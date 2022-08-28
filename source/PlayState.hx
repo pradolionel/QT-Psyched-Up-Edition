@@ -420,7 +420,7 @@ class PlayState extends MusicBeatState
 		debugKeysChart = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 		debugKeysCharacter = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_2'));
 
-		dodgeKey = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('qt_dodge')) #if android || androidControls.hitbox.buttonDodge.justPressed #end;
+		dodgeKey = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('qt_dodge'));
 		tauntKey = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('qt_taunt'));
 
 		Achievements.loadAchievements();
@@ -1434,7 +1434,7 @@ class PlayState extends MusicBeatState
 		doof.cameras = [camHUD];
 
 		#if android
-		addAndroidControls();
+		addAndroidControls(DEFAULT);
 		#end
 
 		// if (SONG.song == 'South')
