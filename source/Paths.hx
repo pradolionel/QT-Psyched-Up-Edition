@@ -21,11 +21,13 @@ import flixel.graphics.FlxGraphic;
 import openfl.display.BitmapData;
 import flash.media.Sound;
 import openfl.Lib;
+import openfl.display3D.textures.Texture;
 
 using StringTools;
 
 class Paths
 {
+        public static var currentTrackedTextures:Map<String, Texture> = [];
 	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
 	inline public static var VIDEO_EXT = "mp4";
 
@@ -58,7 +60,17 @@ class Paths
 				@:privateAccess
 				if (obj != null)
 				{
+                                        var isTexture:Bool = currentTrackedTextures.exists(key);
+					if (isTexture)
+					{
+						var texture = currentTrackedTextures.get(key);
+						texture.dispose();
+						texture = null;
+						currentTrackedTextures.remove(key);
+					}
 					openfl.Assets.cache.removeBitmapData(key);
+                                        Openfl.Assets.cache.clearBitmapData(key);
+					Openfl.Assets.cache.clear(key);
 					FlxG.bitmap._cache.remove(key);
 					obj.destroy();
 					currentTrackedAssets.remove(key);
