@@ -32,7 +32,7 @@ class MainMenuState extends MusicBeatState
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
 
-	var optionShit:Array<String> = [
+	final optionShit:Array<String> = [
 		'story_mode',
 		'freeplay',
 		// #if MODS_ALLOWED 'mods', #end
@@ -158,6 +158,10 @@ class MainMenuState extends MusicBeatState
 				ClientPrefs.saveSettings();
 			}
 		}
+		#end
+
+		#if android
+		addVirtualPad(UP_DOWN, A_B);
 		#end
 
 		super.create();

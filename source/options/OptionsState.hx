@@ -29,7 +29,8 @@ using StringTools;
 
 class OptionsState extends MusicBeatState
 {
-	var options:Array<String> = [
+	final options:Array<String> = [
+		#if android 'Android Controls', #end
 		'Note Colors',
 		'Controls',
 		'Adjust Delay and Combo',
@@ -44,8 +45,17 @@ class OptionsState extends MusicBeatState
 
 	function openSelectedSubstate(label:String)
 	{
+		#if android
+		if (label != 'Adjust Delay and Combo')
+			removeVirtualPad();
+		#end
+
 		switch (label)
 		{
+			#if android
+			case 'Android Controls':
+				openSubState(new android.AndroidControlsSubState());
+			#end
 			case 'Note Colors':
 				openSubState(new options.NotesSubState());
 			case 'Controls':
@@ -96,6 +106,10 @@ class OptionsState extends MusicBeatState
 
 		changeSelection();
 		ClientPrefs.saveSettings();
+
+		#if android
+		addVirtualPad(UP_DOWN, A_B);
+		#end
 
 		super.create();
 	}
