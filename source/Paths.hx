@@ -27,7 +27,7 @@ using StringTools;
 
 class Paths
 {
-        public static var currentTrackedTextures:Map<String, Texture> = [];
+	public static var currentTrackedTextures:Map<String, Texture> = [];
 	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
 	inline public static var VIDEO_EXT = "mp4";
 
@@ -38,29 +38,28 @@ class Paths
 	];
 	#end
 
-	public static function excludeAsset(key:String)
-	{
-		if (!dumpExclusions.contains(key))
-			dumpExclusions.push(key);
-	}
+	public static var currentTrackedAssets:Map<String, FlxGraphic> = [];
+	public static var currentTrackedTextures:Map<String, Texture> = [];
+	public static var currentTrackedSounds:Map<String, Sound> = [];
 
-	public static var dumpExclusions:Array<String> = [];
+	public static var localTrackedAssets:Array<String> = [];
 
 	/// haya I love you for the base cache dump I took to the max
 	public static function clearUnusedMemory()
 	{
 		// clear non local assets in the tracked assets list
+		var counter:Int = 0;
 		for (key in currentTrackedAssets.keys())
 		{
 			// if it is not currently contained within the used local assets
-			if (!localTrackedAssets.contains(key) && !dumpExclusions.contains(key))
+			if (!localTrackedAssets.contains(key))
 			{
 				// get rid of it
 				var obj = currentTrackedAssets.get(key);
 				@:privateAccess
 				if (obj != null)
 				{
-                                        var isTexture:Bool = currentTrackedTextures.exists(key);
+					var isTexture:Bool = currentTrackedTextures.exists(key);
 					if (isTexture)
 					{
 						var texture = currentTrackedTextures.get(key);
@@ -68,62 +67,68 @@ class Paths
 						texture = null;
 						currentTrackedTextures.remove(key);
 					}
-					openfl.Assets.cache.removeBitmapData(key);
-                                        openfl.Assets.cache.clearBitmapData(key);
-					openfl.Assets.cache.clear(key);
+					OpenFlAssets.cache.removeBitmapData(key);
+					OpenFlAssets.cache.clearBitmapData(key);
+					OpenFlAssets.cache.clear(key);
 					FlxG.bitmap._cache.remove(key);
 					obj.destroy();
 					currentTrackedAssets.remove(key);
+					counter++;
 				}
 			}
 		}
+
 		// run the garbage collector for good measure lmfao
 		System.gc();
 	}
 
-	// define the locally tracked assets
-	public static var localTrackedAssets:Array<String> = [];
-
-	public static function clearStoredMemory(?cleanUnused:Bool = false)
+	public static function clearStoredMemory()
 	{
 		// clear anything not in the tracked assets list
+		var counterAssets:Int = 0;
+
 		@:privateAccess
 		for (key in FlxG.bitmap._cache.keys())
 		{
 			var obj = FlxG.bitmap._cache.get(key);
 			if (obj != null && !currentTrackedAssets.exists(key))
 			{
-				openfl.Assets.cache.removeBitmapData(key);
-                                openfl.Assets.cache.clearBitmapData(key);
-				openfl.Assets.cache.clear(key);
+				OpenFlAssets.cache.removeBitmapData(key);
+				OpenFlAssets.cache.clearBitmapData(key);
+				OpenFlAssets.cache.clear(key);
 				FlxG.bitmap._cache.remove(key);
 				obj.destroy();
+				counterAssets++;
 			}
 		}
 
 		// clear all sounds that are cached
+		var counterSound:Int = 0;
 		for (key in currentTrackedSounds.keys())
 		{
-			if (!localTrackedAssets.contains(key) && !dumpExclusions.contains(key) && key != null)
+			if (!localTrackedAssets.contains(key) && key != null)
 			{
-				// Assets.cache.clear(key);
-                                OpenFlAssets.cache.removeSound(key);
+				// trace('test: ' + dumpExclusions, key);
+				OpenFlAssets.cache.removeSound(key);
 				OpenFlAssets.cache.clearSounds(key);
 				currentTrackedSounds.remove(key);
+				counterSound++;
 			}
 		}
 
-                for (key in OpenFlAssets.cache.getKeys())
+		// Clear everything everything that's left
+		var counterLeft:Int = 0;
+		for (key in OpenFlAssets.cache.getKeys())
 		{
 			if (!localTrackedAssets.contains(key) && key != null)
 			{
 				OpenFlAssets.cache.clear(key);
+				counterLeft++;
 			}
 		}
 
 		// flags everything to be cleared out next unused memory clear
 		localTrackedAssets = [];
-		openfl.Assets.cache.clear("songs");
 	}
 
 	static public var currentModDirectory:String = '';
@@ -375,7 +380,6 @@ class Paths
 			{
 				var newBitmap:BitmapData = BitmapData.fromFile(modsImages(key));
 				var newGraphic:FlxGraphic = null;
-				FlxGraphic.defaultPersist = true;
 				if (gpurender)
 				{
 					switch (ClientPrefs.render)
@@ -405,16 +409,18 @@ class Paths
 
 				newGraphic.persist = true;
 				currentTrackedAssets.set(key, newGraphic);
-                                localTrackedAssets.push(key);
-		                return currentTrackedAssets.get(key);
 			}
+
+			localTrackedAssets.push(key);
+			return currentTrackedAssets.get(key);
 		}
 		#end
-                var path = getPath('images/$key.png', IMAGE, library);
-                if (!currentTrackedAssets.exists(path) && OpenFlAssets.exists(path, IMAGE))
+		var path = getPath('images/$key.png', IMAGE, library);
+		if (OpenFlAssets.exists(path, IMAGE))
+		{
+			if (!currentTrackedAssets.exists(path))
 			{
 				var newGraphic:FlxGraphic = null;
-                                FlxGraphic.defaultPersist = true;
 				var bitmap:BitmapData = OpenFlAssets.getBitmapData(path);
 
 				if (gpurender)
@@ -446,9 +452,12 @@ class Paths
 
 				newGraphic.persist = true;
 				currentTrackedAssets.set(path, newGraphic);
-                                localTrackedAssets.push(path);
-		                return currentTrackedAssets.get(path);
 			}
+
+			localTrackedAssets.push(path);
+			return currentTrackedAssets.get(path);
+		}
+
 		trace('oh no its returning null NOOOO');
 		return null;
 	}
@@ -462,17 +471,14 @@ class Paths
 		if (FileSystem.exists(file))
 		{
 			if (!currentTrackedSounds.exists(file))
-			{
 				currentTrackedSounds.set(file, Sound.fromFile(file));
-			}
 			localTrackedAssets.push(key);
 			return currentTrackedSounds.get(file);
 		}
 		#end
-		// I hate this so god damn much
+
 		var gottenPath:String = SUtil.getPath() + getPath('$path/$key.$SOUND_EXT', SOUND, library);
 		gottenPath = gottenPath.substring(gottenPath.indexOf(':') + 1, gottenPath.length);
-		// trace(gottenPath);
 		if (!currentTrackedSounds.exists(gottenPath))
 			#if MODS_ALLOWED
 			currentTrackedSounds.set(gottenPath, Sound.fromFile(gottenPath));

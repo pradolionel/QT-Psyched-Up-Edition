@@ -1943,7 +1943,7 @@ class PlayState extends MusicBeatState
 			#else
 			if (OpenFlAssets.exists(fileName))
 			#end
-				foundFile = true;
+			foundFile = true;
 		}
 
 		if (foundFile)
@@ -2414,15 +2414,19 @@ class PlayState extends MusicBeatState
 				playerStrums.members[i].x -= 90;
 				playerStrums.members[i].y += ClientPrefs.downScroll ? -130 : 130;
 			}
-			interlopeIntroTween = FlxTween.tween(hazardBlack, {alpha: 0.5}, 24, {onComplete: function(twn:FlxTween)
-			{
-				interlopeIntroTween = null;
-			}});
+			interlopeIntroTween = FlxTween.tween(hazardBlack, {alpha: 0.5}, 24, {
+				onComplete: function(twn:FlxTween)
+				{
+					interlopeIntroTween = null;
+				}
+			});
 
-			interlopeIntroTweenHUD = FlxTween.tween(camHUD, {alpha: 1}, 24, {onComplete: function(twn:FlxTween)
-			{
-				interlopeIntroTweenHUD = null;
-			}});
+			interlopeIntroTweenHUD = FlxTween.tween(camHUD, {alpha: 1}, 24, {
+				onComplete: function(twn:FlxTween)
+				{
+					interlopeIntroTweenHUD = null;
+				}
+			});
 		}
 		else if (SONG.song.toLowerCase() == 'censory-overload')
 		{
@@ -3131,25 +3135,25 @@ class PlayState extends MusicBeatState
 		}
 
 		/*
-				if(hazardModChartEffectWave == 1){
-					var strumYforWave:Float;
-					if(isDownscroll)
-						strumYforWave = FlxG.height - 150;
-					else
-						strumYforWave = 50;
+		if(hazardModChartEffectWave == 1){
+			var strumYforWave:Float;
+			if(isDownscroll)
+				strumYforWave = FlxG.height - 150;
+			else
+				strumYforWave = 50;
 
-					for (i in 0...playerStrums.length) {
-						playerStrums.members[i].y = FlxMath.lerp(
-							strumYforWave, 
-								strumYforWave + (Math.sin(((Conductor.songPosition/300) + (i*0.2) )*Math.PI) * 22), 
-									hazardModChartLerpVariable.x);
+			for (i in 0...playerStrums.length) {
+				playerStrums.members[i].y = FlxMath.lerp(
+					strumYforWave, 
+						strumYforWave + (Math.sin(((Conductor.songPosition/300) + (i*0.2) )*Math.PI) * 22), 
+							hazardModChartLerpVariable.x);
 
-						opponentStrums.members[i].y = FlxMath.lerp(
-							strumYforWave, 
-								strumYforWave + (Math.sin(((Conductor.songPosition/300) + (i*0.2) )*Math.PI) * 22), 
-									hazardModChartLerpVariable.x);
-					}
-				}
+				opponentStrums.members[i].y = FlxMath.lerp(
+					strumYforWave, 
+						strumYforWave + (Math.sin(((Conductor.songPosition/300) + (i*0.2) )*Math.PI) * 22), 
+							hazardModChartLerpVariable.x);
+			}
+		}
 	 */
 
 		// modchart case
@@ -4276,10 +4280,13 @@ class PlayState extends MusicBeatState
 				}
 				else
 				{
-					FlxTween.tween(pincer1, {y: strumLineNotes.members[4].y + 500}, 0.4, {ease: FlxEase.backIn, onComplete: function(twn:FlxTween)
-					{
-						remove(pincer1);
-					}});
+					FlxTween.tween(pincer1, {y: strumLineNotes.members[4].y + 500}, 0.4, {
+						ease: FlxEase.backIn,
+						onComplete: function(twn:FlxTween)
+						{
+							remove(pincer1);
+						}
+					});
 				}
 			}
 			else
@@ -4292,10 +4299,13 @@ class PlayState extends MusicBeatState
 				}
 				else
 				{
-					FlxTween.tween(pincer1, {y: strumLineNotes.members[4].y - 500}, 0.4, {ease: FlxEase.backIn, onComplete: function(twn:FlxTween)
-					{
-						remove(pincer1);
-					}});
+					FlxTween.tween(pincer1, {y: strumLineNotes.members[4].y - 500}, 0.4, {
+						ease: FlxEase.backIn,
+						onComplete: function(twn:FlxTween)
+						{
+							remove(pincer1);
+						}
+					});
 				}
 			}
 		}
@@ -4312,10 +4322,13 @@ class PlayState extends MusicBeatState
 				}
 				else
 				{
-					FlxTween.tween(pincer1, {y: strumLineNotes.members[0].y + 500}, 0.4, {ease: FlxEase.backIn, onComplete: function(twn:FlxTween)
-					{
-						remove(pincer1);
-					}});
+					FlxTween.tween(pincer1, {y: strumLineNotes.members[0].y + 500}, 0.4, {
+						ease: FlxEase.backIn,
+						onComplete: function(twn:FlxTween)
+						{
+							remove(pincer1);
+						}
+					});
 				}
 			}
 			else
@@ -4328,10 +4341,13 @@ class PlayState extends MusicBeatState
 				}
 				else
 				{
-					FlxTween.tween(pincer1, {y: strumLineNotes.members[0].y - 500}, 0.4, {ease: FlxEase.backIn, onComplete: function(twn:FlxTween)
-					{
-						remove(pincer1);
-					}});
+					FlxTween.tween(pincer1, {y: strumLineNotes.members[0].y - 500}, 0.4, {
+						ease: FlxEase.backIn,
+						onComplete: function(twn:FlxTween)
+						{
+							remove(pincer1);
+						}
+					});
 				}
 			}
 		}
@@ -4348,10 +4364,13 @@ class PlayState extends MusicBeatState
 				}
 				else
 				{
-					FlxTween.tween(pincer2, {y: strumLineNotes.members[3].y + 500}, 0.4, {ease: FlxEase.backIn, onComplete: function(twn:FlxTween)
-					{
-						remove(pincer2);
-					}});
+					FlxTween.tween(pincer2, {y: strumLineNotes.members[3].y + 500}, 0.4, {
+						ease: FlxEase.backIn,
+						onComplete: function(twn:FlxTween)
+						{
+							remove(pincer2);
+						}
+					});
 				}
 			}
 			else
@@ -4364,10 +4383,13 @@ class PlayState extends MusicBeatState
 				}
 				else
 				{
-					FlxTween.tween(pincer2, {y: strumLineNotes.members[3].y - 500}, 0.4, {ease: FlxEase.backIn, onComplete: function(twn:FlxTween)
-					{
-						remove(pincer2);
-					}});
+					FlxTween.tween(pincer2, {y: strumLineNotes.members[3].y - 500}, 0.4, {
+						ease: FlxEase.backIn,
+						onComplete: function(twn:FlxTween)
+						{
+							remove(pincer2);
+						}
+					});
 				}
 			}
 		}
@@ -4384,10 +4406,13 @@ class PlayState extends MusicBeatState
 				}
 				else
 				{
-					FlxTween.tween(pincer2, {y: strumLineNotes.members[5].y + 500}, 0.4, {ease: FlxEase.backIn, onComplete: function(twn:FlxTween)
-					{
-						remove(pincer2);
-					}});
+					FlxTween.tween(pincer2, {y: strumLineNotes.members[5].y + 500}, 0.4, {
+						ease: FlxEase.backIn,
+						onComplete: function(twn:FlxTween)
+						{
+							remove(pincer2);
+						}
+					});
 				}
 			}
 			else
@@ -4400,10 +4425,13 @@ class PlayState extends MusicBeatState
 				}
 				else
 				{
-					FlxTween.tween(pincer2, {y: strumLineNotes.members[5].y - 500}, 0.4, {ease: FlxEase.backIn, onComplete: function(twn:FlxTween)
-					{
-						remove(pincer2);
-					}});
+					FlxTween.tween(pincer2, {y: strumLineNotes.members[5].y - 500}, 0.4, {
+						ease: FlxEase.backIn,
+						onComplete: function(twn:FlxTween)
+						{
+							remove(pincer2);
+						}
+					});
 				}
 			}
 		}
@@ -4420,10 +4448,13 @@ class PlayState extends MusicBeatState
 				}
 				else
 				{
-					FlxTween.tween(pincer3, {y: strumLineNotes.members[6].y + 500}, 0.4, {ease: FlxEase.backIn, onComplete: function(twn:FlxTween)
-					{
-						remove(pincer3);
-					}});
+					FlxTween.tween(pincer3, {y: strumLineNotes.members[6].y + 500}, 0.4, {
+						ease: FlxEase.backIn,
+						onComplete: function(twn:FlxTween)
+						{
+							remove(pincer3);
+						}
+					});
 				}
 			}
 			else
@@ -4436,10 +4467,13 @@ class PlayState extends MusicBeatState
 				}
 				else
 				{
-					FlxTween.tween(pincer3, {y: strumLineNotes.members[6].y - 500}, 0.4, {ease: FlxEase.backIn, onComplete: function(twn:FlxTween)
-					{
-						remove(pincer3);
-					}});
+					FlxTween.tween(pincer3, {y: strumLineNotes.members[6].y - 500}, 0.4, {
+						ease: FlxEase.backIn,
+						onComplete: function(twn:FlxTween)
+						{
+							remove(pincer3);
+						}
+					});
 				}
 			}
 		}
@@ -4456,10 +4490,13 @@ class PlayState extends MusicBeatState
 				}
 				else
 				{
-					FlxTween.tween(pincer4, {y: strumLineNotes.members[7].y + 500}, 0.4, {ease: FlxEase.backIn, onComplete: function(twn:FlxTween)
-					{
-						remove(pincer4);
-					}});
+					FlxTween.tween(pincer4, {y: strumLineNotes.members[7].y + 500}, 0.4, {
+						ease: FlxEase.backIn,
+						onComplete: function(twn:FlxTween)
+						{
+							remove(pincer4);
+						}
+					});
 				}
 			}
 			else
@@ -4472,10 +4509,13 @@ class PlayState extends MusicBeatState
 				}
 				else
 				{
-					FlxTween.tween(pincer4, {y: strumLineNotes.members[7].y - 500}, 0.4, {ease: FlxEase.backIn, onComplete: function(twn:FlxTween)
-					{
-						remove(pincer4);
-					}});
+					FlxTween.tween(pincer4, {y: strumLineNotes.members[7].y - 500}, 0.4, {
+						ease: FlxEase.backIn,
+						onComplete: function(twn:FlxTween)
+						{
+							remove(pincer4);
+						}
+					});
 				}
 			}
 		}
@@ -6702,7 +6742,9 @@ class PlayState extends MusicBeatState
 		if (SONG.dodgeEnabled)
 		{
 			// FlxG.keys.justPressed.SPACE
-			if ((FlxG.keys.anyJustPressed(dodgeKey) #if android || androidControls.hitbox.buttonDodge.justPressed #end) && !bfDodging && bfCanDodge)
+			if ((FlxG.keys.anyJustPressed(dodgeKey) #if android || androidControls.hitbox.buttonDodge.justPressed #end)
+				&& !bfDodging
+				&& bfCanDodge)
 			{
 				bfDodge();
 			}
