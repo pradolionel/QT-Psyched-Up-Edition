@@ -1958,6 +1958,7 @@ class PlayState extends MusicBeatState
 			video.finishCallback = function()
 			{
 				remove(bg);
+				Paths.clearUnusedMemory();
 				startAndEnd();
 			}
 			video.playVideo(fileName);
@@ -2908,6 +2909,8 @@ class PlayState extends MusicBeatState
 	{
 		openSubStatePauseShit();
 		super.openSubState(SubState);
+
+		Paths.clearUnusedMemory();
 	}
 
 	override function closeSubState()
@@ -3003,6 +3006,8 @@ class PlayState extends MusicBeatState
 		}
 
 		super.closeSubState();
+
+		Paths.clearUnusedMemory();
 	}
 
 	override public function onFocus():Void

@@ -349,7 +349,7 @@ class Paths
 			{
 				var newBitmap:BitmapData = BitmapData.fromFile(modsImages(key));
 				var newGraphic:FlxGraphic = FlxGraphic.fromBitmapData(newBitmap, false, key);
-				newGraphic.defaultPersist = true;
+				FlxGraphic.defaultPersist = true;
 				currentTrackedAssets.set(key, newGraphic);
 			}
 			localTrackedAssets.push(key);
@@ -362,7 +362,7 @@ class Paths
 			if (!currentTrackedAssets.exists(key))
 			{
 				var newGraphic:FlxGraphic = FlxG.bitmap.add(path, false, key);
-				newGraphic.defaultPersist = true;
+				FlxGraphic.defaultPersist = true;
 				currentTrackedAssets.set(key, newGraphic);
 			}
 			localTrackedAssets.push(key);

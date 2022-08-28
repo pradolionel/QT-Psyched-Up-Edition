@@ -71,6 +71,7 @@ class ModsMenuState extends MusicBeatState
 	{
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
+
 		WeekData.setDirectoryFromWeek();
 
 		#if desktop

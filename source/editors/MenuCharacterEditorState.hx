@@ -41,6 +41,9 @@ class MenuCharacterEditorState extends MusicBeatState
 
 	override function create()
 	{
+		Paths.clearStoredMemory();
+		Paths.clearUnusedMemory();
+
 		characterFile = {
 			image: 'Menu_Dad',
 			scale: 1,
