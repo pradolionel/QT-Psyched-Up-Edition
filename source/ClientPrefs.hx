@@ -291,7 +291,7 @@ class ClientPrefs
 		{
 			controllerMode = FlxG.save.data.controllerMode;
 		}
-                if (FlxG.save.data.mechsInputVariants != null) {
+                if (FlxG.save.data.mechsInputVariants != null)
                 {
                         mechsInputVariants = FlxG.save.data.mechsInputVariants;
                 }
