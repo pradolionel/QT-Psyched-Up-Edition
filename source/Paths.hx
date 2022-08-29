@@ -27,7 +27,6 @@ using StringTools;
 
 class Paths
 {
-	public static var currentTrackedTextures:Map<String, Texture> = [];
 	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
 	inline public static var VIDEO_EXT = "mp4";
 
@@ -368,9 +367,6 @@ class Paths
 		return path.toLowerCase().replace(' ', '-');
 	}
 
-	// completely rewritten asset loading? fuck!
-	public static var currentTrackedAssets:Map<String, FlxGraphic> = [];
-
 	public static function returnGraphic(key:String, ?library:String, ?gpurender:Bool = false)
 	{
 		#if MODS_ALLOWED
@@ -378,7 +374,7 @@ class Paths
 		{
 			if (!currentTrackedAssets.exists(key))
 			{
-				var newBitmap:BitmapData = BitmapData.fromFile(modsImages(key));
+				var bitmap:BitmapData = BitmapData.fromFile(modsImages(key));
 				var newGraphic:FlxGraphic = null;
 				if (gpurender)
 				{
@@ -391,7 +387,7 @@ class Paths
 							bitmap.dispose();
 							bitmap.disposeImage();
 							bitmap = null;
-							newGraphic = FlxGraphic.fromBitmapData(BitmapData.fromTexture(texture), false, path);
+							newGraphic = FlxGraphic.fromBitmapData(BitmapData.fromTexture(texture), false, key);
 						case 2:
 							var texture = Lib.current.stage.context3D.createTexture(bitmap.width, bitmap.height, BGRA, true);
 							texture.uploadFromBitmapData(bitmap);
@@ -399,13 +395,13 @@ class Paths
 							bitmap.dispose();
 							bitmap.disposeImage();
 							bitmap = null;
-							newGraphic = FlxGraphic.fromBitmapData(BitmapData.fromTexture(texture), false, path);
+							newGraphic = FlxGraphic.fromBitmapData(BitmapData.fromTexture(texture), false, key);
 						default:
-							newGraphic = FlxGraphic.fromBitmapData(bitmap, false, path);
+							newGraphic = FlxGraphic.fromBitmapData(bitmap, false, key);
 					}
 				}
 				else
-					newGraphic = FlxGraphic.fromBitmapData(bitmap, false, path);
+					newGraphic = FlxGraphic.fromBitmapData(bitmap, false, key);
 
 				newGraphic.persist = true;
 				currentTrackedAssets.set(key, newGraphic);
@@ -461,8 +457,6 @@ class Paths
 		trace('oh no its returning null NOOOO');
 		return null;
 	}
-
-	public static var currentTrackedSounds:Map<String, Sound> = [];
 
 	public static function returnSound(path:String, key:String, ?library:String)
 	{
