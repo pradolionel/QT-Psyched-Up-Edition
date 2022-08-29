@@ -38,7 +38,7 @@ class ClientPrefs
 	public static var controllerMode:Bool = #if android true #else false #end;
 	public static var mechsInputVariants = true;
 	public static var render = 0;
-        public statuc var gradientHitboxes = false;
+        public static var gradientHitboxes = false;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative',
