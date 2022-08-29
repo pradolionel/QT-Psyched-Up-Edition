@@ -374,7 +374,7 @@ class Paths
 		{
 			if (!currentTrackedAssets.exists(key))
 			{
-				var newBitmap:BitmapData = BitmapData.fromFile(modsImages(key));
+				var bitmap:BitmapData = BitmapData.fromFile(modsImages(key));
 				var newGraphic:FlxGraphic = null;
 				if (gpurender)
 				{
