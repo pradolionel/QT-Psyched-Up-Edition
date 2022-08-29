@@ -49,6 +49,12 @@ class VisualsUISubState extends BaseOptionsMenu
 		var option:Option = new Option('Hide HUD', 'If checked, hides most HUD elements.', 'hideHud', 'bool', false);
 		addOption(option);
 
+                var option:Option = new Option('hitbox Opacity', 'allows you to customize opacity of hitboxes', 'hitboxOpacity', 'percent', 0.3);
+                option.minValue = 0.0;
+		option.maxValue = 1;
+		option.changeValue = 0.1;
+                addOption(option);
+
 		var option:Option = new Option('Time Bar:', "What should the Time Bar display?", 'timeBarType', 'string', 'Time Left',
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
 		addOption(option);
