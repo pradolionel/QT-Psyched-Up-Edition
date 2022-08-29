@@ -39,6 +39,7 @@ class ClientPrefs
 	public static var mechsInputVariants = true;
 	public static var render = 0;
         public static var gradientHitboxes = false;
+        public static var hitboxOpacity = 0.3;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative',
@@ -141,6 +142,7 @@ class ClientPrefs
 		FlxG.save.data.mechsInputVariants = mechsInputVariants;
 		FlxG.save.data.render = render;
                 FlxG.save.data.gradientHitboxes = gradientHitboxes;
+                FlxG.save.data.hitboxOpacity = hitboxOpacity;
 
 		FlxG.save.flush();
 
@@ -306,6 +308,10 @@ class ClientPrefs
                 if (FlxG.save.data.gradientHitboxes != null)
                 {
                         gradientHitboxes = FlxG.save.data.gradientHitboxes;
+                }
+                if (FlxG.save.data.hitboxOpacity != null)
+                {
+                        hitboxOpacity = FlxG.save.data.hitboxOpacity;
                 }
 		if (FlxG.save.data.gameplaySettings != null)
 		{
