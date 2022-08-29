@@ -38,6 +38,7 @@ class ClientPrefs
 	public static var controllerMode:Bool = #if android true #else false #end;
 	public static var mechsInputVariants = true;
 	public static var render = 0;
+        public statuc var gradientHitboxes = false;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative',
@@ -139,6 +140,7 @@ class ClientPrefs
 		FlxG.save.data.controllerMode = controllerMode;
 		FlxG.save.data.mechsInputVariants = mechsInputVariants;
 		FlxG.save.data.render = render;
+                FlxG.save.data.gradientHitboxes = gradientHitboxes;
 
 		FlxG.save.flush();
 
@@ -301,6 +303,10 @@ class ClientPrefs
 		{
 			render = FlxG.save.data.render;
 		}
+                if (FlxG.save.data.gradientHitboxes != null)
+                {
+                        gradientHitboxes = FlxG.save.data.gradientHitboxes;
+                }
 		if (FlxG.save.data.gameplaySettings != null)
 		{
 			var savedMap:Map<String, Dynamic> = FlxG.save.data.gameplaySettings;
