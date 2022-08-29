@@ -60,6 +60,9 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool', true);
 		addOption(option);
 
+                var option:Option = new Option('Gradient Hitboxes', 'if checked, hitboxes would have gradient', 'gradientHitboxes', 'bool', false);
+                addOption(option);
+
 		var option:Option = new Option('Middlescroll', 'If checked, your notes get centered.', 'middleScroll', 'bool', false);
 		addOption(option);
 
