@@ -387,7 +387,7 @@ class Paths
 							bitmap.dispose();
 							bitmap.disposeImage();
 							bitmap = null;
-							newGraphic = FlxGraphic.fromBitmapData(BitmapData.fromTexture(texture), false, path);
+							newGraphic = FlxGraphic.fromBitmapData(BitmapData.fromTexture(texture), false, key);
 						case 2:
 							var texture = Lib.current.stage.context3D.createTexture(bitmap.width, bitmap.height, BGRA, true);
 							texture.uploadFromBitmapData(bitmap);
@@ -395,13 +395,13 @@ class Paths
 							bitmap.dispose();
 							bitmap.disposeImage();
 							bitmap = null;
-							newGraphic = FlxGraphic.fromBitmapData(BitmapData.fromTexture(texture), false, path);
+							newGraphic = FlxGraphic.fromBitmapData(BitmapData.fromTexture(texture), false, key);
 						default:
-							newGraphic = FlxGraphic.fromBitmapData(bitmap, false, path);
+							newGraphic = FlxGraphic.fromBitmapData(bitmap, false, key);
 					}
 				}
 				else
-					newGraphic = FlxGraphic.fromBitmapData(bitmap, false, path);
+					newGraphic = FlxGraphic.fromBitmapData(bitmap, false, key);
 
 				newGraphic.persist = true;
 				currentTrackedAssets.set(key, newGraphic);
