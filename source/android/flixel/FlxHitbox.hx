@@ -43,16 +43,16 @@ class FlxHitbox extends FlxSpriteGroup
 				add(buttonUp = createHint(FlxG.width / 2, 0, Std.int(FlxG.width / 4), FlxG.height, 0x00FF00));
 				add(buttonRight = createHint((FlxG.width / 2) + (FlxG.width / 4), 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF0000));
 			case TAUNT:
-				add(buttonLeft = createHint(0, offsetSec, Std.int(FlxG.width / 4), FlxG.height, 0xFF00FF));
-				add(buttonDown = createHint(FlxG.width / 4, offsetSec, Std.int(FlxG.width / 4), FlxG.height, 0x00FFFF));
-				add(buttonUp = createHint(FlxG.width / 2, offsetSec, Std.int(FlxG.width / 4), FlxG.height, 0x00FF00));
-				add(buttonRight = createHint((FlxG.width / 2) + (FlxG.width / 4), offsetSec, Std.int(FlxG.width / 4), FlxG.height, 0xFF0000));
+				add(buttonLeft = createHint(0, offsetSec, Std.int(FlxG.width / 4), 540, 0xFF00FF));
+				add(buttonDown = createHint(FlxG.width / 4, offsetSec, Std.int(FlxG.width / 4), 540, 0x00FFFF));
+				add(buttonUp = createHint(FlxG.width / 2, offsetSec, Std.int(FlxG.width / 4), 540, 0x00FF00));
+				add(buttonRight = createHint((FlxG.width / 2) + (FlxG.width / 4), offsetSec, Std.int(FlxG.width / 4), 540, 0xFF0000));
 				add(buttonTaunt = createHint(0, offsetFir, FlxG.width, Std.int(FlxG.height / 4), 0xFF00B3));
 			case DODGE:
-				add(buttonLeft = createHint(0, offsetSec, Std.int(FlxG.width / 4), FlxG.height, 0xFF00FF));
-				add(buttonDown = createHint(FlxG.width / 4, offsetSec, Std.int(FlxG.width / 4), FlxG.height, 0x00FFFF));
-				add(buttonUp = createHint(FlxG.width / 2, offsetSec, Std.int(FlxG.width / 4), FlxG.height, 0x00FF00));
-				add(buttonRight = createHint((FlxG.width / 2) + (FlxG.width / 4), offsetSec, Std.int(FlxG.width / 4), FlxG.height, 0xFF0000));
+				add(buttonLeft = createHint(0, offsetSec, Std.int(FlxG.width / 4), 540, 0xFF00FF));
+				add(buttonDown = createHint(FlxG.width / 4, offsetSec, Std.int(FlxG.width / 4), 540, 0x00FFFF));
+				add(buttonUp = createHint(FlxG.width / 2, offsetSec, Std.int(FlxG.width / 4), 540, 0x00FF00));
+				add(buttonRight = createHint((FlxG.width / 2) + (FlxG.width / 4), offsetSec, Std.int(FlxG.width / 4), 540, 0xFF0000));
 				add(buttonDodge = createHint(0, offsetFir, FlxG.width, Std.int(FlxG.height / 4), 0xFFFF00));
 			case DOUBLE:
 				add(buttonLeft = createHint(0, offsetSec, Std.int(FlxG.width / 4), 540, 0xFF00FF));
