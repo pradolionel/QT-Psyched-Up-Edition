@@ -901,9 +901,9 @@ class PlayState extends MusicBeatState
 						fogShitGroup.add(fogShitDEBUG);
 					 */
 					add(fogShitGroup);
-					
+
 					hazardInterlopeLaugh = new FlxSprite();
-				    hazardInterlopeLaugh.frames = Paths.getSparrowAtlas('hazard/inhuman-port/ameliaTaunt');
+					hazardInterlopeLaugh.frames = Paths.getSparrowAtlas('hazard/inhuman-port/ameliaTaunt');
 					hazardInterlopeLaugh.animation.addByPrefix('laugh1', 'Amelia_Chuckle', 24, true);
 					hazardInterlopeLaugh.animation.addByPrefix('laugh2', 'Amelia_Laugh', 30, true);
 					hazardInterlopeLaugh.antialiasing = ClientPrefs.globalAntialiasing;
@@ -1001,74 +1001,77 @@ class PlayState extends MusicBeatState
 		}
 
 		// Alert!
-		if (SONG.song.toLowerCase() == "termination") {
-		    kb_attack_alert = new FlxSprite();
-		    kb_attack_alert.frames = Paths.getSparrowAtlas('hazard/qt-port/attack_alert_NEW');
-		    kb_attack_alert.animation.addByPrefix('alert', 'kb_attack_animation_alert-single', 24, false);
-		    kb_attack_alert.animation.addByPrefix('alertDOUBLE', 'kb_attack_animation_alert-double', 24, false);
-		    kb_attack_alert.animation.addByPrefix('alertTRIPLE', 'kb_attack_animation_alert-triple', 24, false);
-		    kb_attack_alert.animation.addByPrefix('alertQUAD', 'kb_attack_animation_alert-quad', 24, false);
-		    kb_attack_alert.antialiasing = ClientPrefs.globalAntialiasing;
-		    kb_attack_alert.setGraphicSize(Std.int(kb_attack_alert.width * 1.5));
-		    kb_attack_alert.cameras = [camHUD];
-		    kb_attack_alert.x = FlxG.width - 700;
-		    kb_attack_alert.y = 205;
-		    // kb_attack_alert.animation.play("alert"); //Placeholder, change this to start already hidden or whatever.
+		if (SONG.song.toLowerCase() == "termination")
+		{
+			kb_attack_alert = new FlxSprite();
+			kb_attack_alert.frames = Paths.getSparrowAtlas('hazard/qt-port/attack_alert_NEW');
+			kb_attack_alert.animation.addByPrefix('alert', 'kb_attack_animation_alert-single', 24, false);
+			kb_attack_alert.animation.addByPrefix('alertDOUBLE', 'kb_attack_animation_alert-double', 24, false);
+			kb_attack_alert.animation.addByPrefix('alertTRIPLE', 'kb_attack_animation_alert-triple', 24, false);
+			kb_attack_alert.animation.addByPrefix('alertQUAD', 'kb_attack_animation_alert-quad', 24, false);
+			kb_attack_alert.antialiasing = ClientPrefs.globalAntialiasing;
+			kb_attack_alert.setGraphicSize(Std.int(kb_attack_alert.width * 1.5));
+			kb_attack_alert.cameras = [camHUD];
+			kb_attack_alert.x = FlxG.width - 700;
+			kb_attack_alert.y = 205;
+			// kb_attack_alert.animation.play("alert"); //Placeholder, change this to start already hidden or whatever.
 
-		    // Saw that one coming!
-		    kb_attack_saw = new FlxSprite();
-		    kb_attack_saw.frames = Paths.getSparrowAtlas('hazard/qt-port/attackv6');
-		    kb_attack_saw.animation.addByPrefix('fire', 'kb_attack_animation_fire', 24, false);
-		    kb_attack_saw.animation.addByPrefix('prepare', 'kb_attack_animation_prepare', 24, false);
-		    kb_attack_saw.setGraphicSize(Std.int(kb_attack_saw.width * 1.15));
-		    kb_attack_saw.antialiasing = ClientPrefs.globalAntialiasing;
-		    kb_attack_saw.setPosition(-860, 630);
+			// Saw that one coming!
+			kb_attack_saw = new FlxSprite();
+			kb_attack_saw.frames = Paths.getSparrowAtlas('hazard/qt-port/attackv6');
+			kb_attack_saw.animation.addByPrefix('fire', 'kb_attack_animation_fire', 24, false);
+			kb_attack_saw.animation.addByPrefix('prepare', 'kb_attack_animation_prepare', 24, false);
+			kb_attack_saw.setGraphicSize(Std.int(kb_attack_saw.width * 1.15));
+			kb_attack_saw.antialiasing = ClientPrefs.globalAntialiasing;
+			kb_attack_saw.setPosition(-860, 630);
 		}
 
 		sawbladeHits = 0;
 		tauntCounter = 0;
-		
-		if (SONG.song.toLowerCase() == "termination") {
-		    // Pincer shit for moving notes around for a little bit of trollin'
-		    pincer1 = new FlxSprite(0, 0).loadGraphic(Paths.image('hazard/qt-port/pincer-open')); // (sirox) just need to cache that shit, cuz devs are dumb and forgot
-		    pincer1.loadGraphic(Paths.image('hazard/qt-port/pincer-close'));
-		    pincer1.antialiasing = ClientPrefs.globalAntialiasing;
-		    pincer1.scrollFactor.set();
 
-		    pincer2 = new FlxSprite(0, 0).loadGraphic(Paths.image('hazard/qt-port/pincer-close'));
-		    pincer2.antialiasing = ClientPrefs.globalAntialiasing;
-		    pincer2.scrollFactor.set();
+		if (SONG.song.toLowerCase() == "termination")
+		{
+			// Pincer shit for moving notes around for a little bit of trollin'
+			pincer1 = new FlxSprite(0,
+				0).loadGraphic(Paths.image('hazard/qt-port/pincer-open')); // (sirox) just need to cache that shit, cuz devs are dumb and forgot
+			pincer1.loadGraphic(Paths.image('hazard/qt-port/pincer-close'));
+			pincer1.antialiasing = ClientPrefs.globalAntialiasing;
+			pincer1.scrollFactor.set();
 
-		    pincer3 = new FlxSprite(0, 0).loadGraphic(Paths.image('hazard/qt-port/pincer-close'));
-		    pincer3.antialiasing = ClientPrefs.globalAntialiasing;
-		    pincer3.scrollFactor.set();
+			pincer2 = new FlxSprite(0, 0).loadGraphic(Paths.image('hazard/qt-port/pincer-close'));
+			pincer2.antialiasing = ClientPrefs.globalAntialiasing;
+			pincer2.scrollFactor.set();
 
-		    pincer4 = new FlxSprite(0, 0).loadGraphic(Paths.image('hazard/qt-port/pincer-close'));
-		    pincer4.antialiasing = ClientPrefs.globalAntialiasing;
-		    pincer4.scrollFactor.set();
+			pincer3 = new FlxSprite(0, 0).loadGraphic(Paths.image('hazard/qt-port/pincer-close'));
+			pincer3.antialiasing = ClientPrefs.globalAntialiasing;
+			pincer3.scrollFactor.set();
 
-		    if (ClientPrefs.downScroll)
-		    {
-			    pincer4.angle = 270;
-			    pincer3.angle = 270;
-			    pincer2.angle = 270;
-			    pincer1.angle = 270;
-			    pincer1.offset.set(192, -75);
-			    pincer2.offset.set(192, -75);
-			    pincer3.offset.set(192, -75);
-			    pincer4.offset.set(192, -75);
-		    }
-		    else
-		    {
-			    pincer4.angle = 90;
-			    pincer3.angle = 90;
-			    pincer2.angle = 90;
-			    pincer1.angle = 90;
-			    pincer1.offset.set(218, 240);
-			    pincer2.offset.set(218, 240);
-			    pincer3.offset.set(218, 240);
-			    pincer4.offset.set(218, 240);
-		    }
+			pincer4 = new FlxSprite(0, 0).loadGraphic(Paths.image('hazard/qt-port/pincer-close'));
+			pincer4.antialiasing = ClientPrefs.globalAntialiasing;
+			pincer4.scrollFactor.set();
+
+			if (ClientPrefs.downScroll)
+			{
+				pincer4.angle = 270;
+				pincer3.angle = 270;
+				pincer2.angle = 270;
+				pincer1.angle = 270;
+				pincer1.offset.set(192, -75);
+				pincer2.offset.set(192, -75);
+				pincer3.offset.set(192, -75);
+				pincer4.offset.set(192, -75);
+			}
+			else
+			{
+				pincer4.angle = 90;
+				pincer3.angle = 90;
+				pincer2.angle = 90;
+				pincer1.angle = 90;
+				pincer1.offset.set(218, 240);
+				pincer2.offset.set(218, 240);
+				pincer3.offset.set(218, 240);
+				pincer4.offset.set(218, 240);
+			}
 		}
 
 		// For the 'alarm' effect. Only added if flashling lights is allowed and low quality is off.
@@ -1439,18 +1442,19 @@ class PlayState extends MusicBeatState
 		doof.cameras = [camHUD];
 
 		#if android
-		if (SONG.song.toLowerCase() == 'termination') {
-			if (ClientPrefs.tauntHitbox) {
-		            addAndroidControls(DOUBLE);
-		        } else {
-			    addAndroidControls(DODGE);
-			}
-		} else {
-			if (ClientPrefs.tauntHitbox) {
-		            addAndroidControls(TAUNT);
-		        } else {
-			    addAndroidControls(DEFAULT);
-			}
+		if (SONG.song.toLowerCase() == 'termination')
+		{
+			if (ClientPrefs.tauntHitbox)
+				addAndroidControls(DOUBLE);
+			else
+				addAndroidControls(DODGE);
+		}
+		else
+		{
+			if (ClientPrefs.tauntHitbox)
+				addAndroidControls(TAUNT);
+			else
+				addAndroidControls(DEFAULT);
 		}
 		#end
 

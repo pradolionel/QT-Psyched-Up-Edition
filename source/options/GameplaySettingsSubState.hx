@@ -59,7 +59,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		var option:Option = new Option('Hitbox Pose', 'if unchecked, hitboxes for mechanics would be at the top instead of bottom', 'mechsInputVariants',
 			'bool', true);
 		addOption(option);
-		
+
 		var option:Option = new Option('Tount Hitbox', "if unchecked, hitbox for taunt won't be displayed", 'tauntHitbox', 'bool', true);
 		addOption(option);
 

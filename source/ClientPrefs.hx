@@ -38,9 +38,9 @@ class ClientPrefs
 	public static var controllerMode:Bool = #if android true #else false #end;
 	public static var mechsInputVariants = true;
 	public static var render = 0;
-        public static var gradientHitboxes = false;
-        public static var hitboxOpacity = 0.3;
-        public static var tauntHitbox = true;
+	public static var gradientHitboxes = false;
+	public static var hitboxOpacity = 0.3;
+	public static var tauntHitbox = true;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative',
@@ -142,9 +142,9 @@ class ClientPrefs
 		FlxG.save.data.controllerMode = controllerMode;
 		FlxG.save.data.mechsInputVariants = mechsInputVariants;
 		FlxG.save.data.render = render;
-                FlxG.save.data.gradientHitboxes = gradientHitboxes;
-                FlxG.save.data.hitboxOpacity = hitboxOpacity;
-                FlxG.save.data.tauntHitbox = tauntHitbox;
+		FlxG.save.data.gradientHitboxes = gradientHitboxes;
+		FlxG.save.data.hitboxOpacity = hitboxOpacity;
+		FlxG.save.data.tauntHitbox = tauntHitbox;
 
 		FlxG.save.flush();
 
@@ -307,18 +307,18 @@ class ClientPrefs
 		{
 			render = FlxG.save.data.render;
 		}
-                if (FlxG.save.data.gradientHitboxes != null)
-                {
-                        gradientHitboxes = FlxG.save.data.gradientHitboxes;
-                }
-                if (FlxG.save.data.hitboxOpacity != null)
-                {
-                        hitboxOpacity = FlxG.save.data.hitboxOpacity;
-                }
-                if (FlxG.save.data.tauntHitbox != null)
-                {
-                	tauntHitbox = FlxG.save.data.tauntHitbox;
-                }
+		if (FlxG.save.data.gradientHitboxes != null)
+		{
+			gradientHitboxes = FlxG.save.data.gradientHitboxes;
+		}
+		if (FlxG.save.data.hitboxOpacity != null)
+		{
+			hitboxOpacity = FlxG.save.data.hitboxOpacity;
+		}
+		if (FlxG.save.data.tauntHitbox != null)
+		{
+			tauntHitbox = FlxG.save.data.tauntHitbox;
+		}
 		if (FlxG.save.data.gameplaySettings != null)
 		{
 			var savedMap:Map<String, Dynamic> = FlxG.save.data.gameplaySettings;
