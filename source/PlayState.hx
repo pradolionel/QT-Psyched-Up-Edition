@@ -987,7 +987,7 @@ class PlayState extends MusicBeatState
 			disableArrowIntro = true;
 
 		// Adding sawblades and pincers to every song so all songs can use them!
-		if (ClientPrefs.flashing && SONG.song.toLowerCase() == "termination")
+		if (ClientPrefs.flashing && SONG.song.toLowerCase() == "termination" || SONG.song.toLowerCase() == "tutorial")
 		{
 			hazardOverlayShit = new BGSprite('hazard/inhuman-port/alert-vignette');
 			hazardOverlayShit.setGraphicSize(FlxG.width, FlxG.height);
@@ -1001,7 +1001,7 @@ class PlayState extends MusicBeatState
 		}
 
 		// Alert!
-		if (SONG.song.toLowerCase() == "termination")
+		if (SONG.song.toLowerCase() == "termination" || SONG.song.toLowerCase() == "tutorial")
 		{
 			kb_attack_alert = new FlxSprite();
 			kb_attack_alert.frames = Paths.getSparrowAtlas('hazard/qt-port/attack_alert_NEW');
@@ -1442,7 +1442,7 @@ class PlayState extends MusicBeatState
 		doof.cameras = [camHUD];
 
 		#if android
-		if (SONG.song.toLowerCase() == 'termination')
+		if (SONG.song.toLowerCase() == 'termination' || SONG.song.toLowerCase() == "tutorial")
 		{
 			if (ClientPrefs.tauntHitbox)
 				addAndroidControls(DOUBLE);
