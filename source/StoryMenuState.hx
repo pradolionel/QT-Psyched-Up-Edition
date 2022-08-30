@@ -374,7 +374,7 @@ class StoryMenuState extends MusicBeatState
 				}
 			});
 		//}
-		lastImagePath = newImagePath;
+		//lastImagePath = newImagePath;
 		lastDifficultyName = CoolUtil.difficulties[curDifficulty];
 
 		#if !switch
