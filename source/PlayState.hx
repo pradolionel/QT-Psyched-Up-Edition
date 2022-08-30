@@ -5799,12 +5799,12 @@ class PlayState extends MusicBeatState
 								{
 									if (wasGf)
 									{
-										gf.visible = true;
+										gf.alpha = 1.0;
 									}
 								}
 								else
 								{
-									gf.visible = false;
+									gf.alpha = 1.0;
 								}
 								dad.alpha = lastAlpha;
 								iconP2.changeIcon(dad.healthIcon);
@@ -5876,12 +5876,12 @@ class PlayState extends MusicBeatState
 							{
 								if (wasGf)
 								{
-									gf.visible = true;
+									gf.alpha = 1.0;
 								}
 							}
 							else
 							{
-								gf.visible = false;
+								gf.alpha = 1.0;
 							}
 							dad.alpha = lastAlpha;
 							iconP2.changeIcon(dad.healthIcon);
