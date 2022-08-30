@@ -59,6 +59,9 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		var option:Option = new Option('mechsHitboxesPos', 'if unchecked, hitboxes for mechanics would be at the top instead of bottom', 'mechsInputVariants',
 			'bool', true);
 		addOption(option);
+		
+		var option:Option = new Option('tauntHitbox', "if unchecked, hitbox for taunt won't be displayed", 'tauntHitbox', 'bool', true);
+		addOption(option);
 
 		var option:Option = new Option('Middlescroll', 'If checked, your notes get centered.', 'middleScroll', 'bool', false);
 		addOption(option);
