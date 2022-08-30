@@ -44,7 +44,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 			false); // Default value
 		addOption(option);
 
-		var option:Option = new Option('render', '0 - ram render, 1 - gpu flash render, 2 - gpu openfl render', 'render', 'int', 0);
+		var option:Option = new Option('Render', '0 - RAM, 1 - GPU with Flash\n2 - GPU with OpenFL', 'render', 'int', 0);
 		option.minValue = 0;
 		option.maxValue = 2;
 		addOption(option);
