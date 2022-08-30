@@ -136,6 +136,8 @@ class PlayState extends MusicBeatState
 	public var gf:Character;
 	public var boyfriend:Boyfriend;
 
+        public var fuckit:Bool = false;
+
 	public var notes:FlxTypedGroup<Note>;
 	public var unspawnNotes:Array<Note> = [];
 	public var eventNotes:Array<Dynamic> = [];
@@ -723,7 +725,7 @@ class PlayState extends MusicBeatState
 					streetFrontError.scrollFactor.set(0.95, 0.95);
 					streetFrontError.active = false;
 					add(streetFrontError);
-					streetFrontError.visible = false;
+					streetFrontError.alpha = 0.0001;
 				}
 
 				qt_tv01 = new FlxSprite();
@@ -809,7 +811,7 @@ class PlayState extends MusicBeatState
 					streetFrontError.scrollFactor.set(0.95, 0.95);
 					streetFrontError.active = false;
 					add(streetFrontError);
-					streetFrontError.visible = false;
+					streetFrontError.alpha = 0.0001;
 				}
 
 				qt_tv01 = new FlxSprite();
@@ -901,9 +903,9 @@ class PlayState extends MusicBeatState
 						fogShitGroup.add(fogShitDEBUG);
 					 */
 					add(fogShitGroup);
-
+					
 					hazardInterlopeLaugh = new FlxSprite();
-					hazardInterlopeLaugh.frames = Paths.getSparrowAtlas('hazard/inhuman-port/ameliaTaunt');
+				    hazardInterlopeLaugh.frames = Paths.getSparrowAtlas('hazard/inhuman-port/ameliaTaunt');
 					hazardInterlopeLaugh.animation.addByPrefix('laugh1', 'Amelia_Chuckle', 24, true);
 					hazardInterlopeLaugh.animation.addByPrefix('laugh2', 'Amelia_Laugh', 30, true);
 					hazardInterlopeLaugh.antialiasing = ClientPrefs.globalAntialiasing;
@@ -945,7 +947,7 @@ class PlayState extends MusicBeatState
 		}
 
 		// Moved gas effect to be useable across all songs!
-		if (!ClientPrefs.lowQuality)
+		if (!ClientPrefs.lowQuality && SONG.song.toLowerCase() == 'censory-overload')
 		{
 			// Probably a better way of doing this... too bad! -Haz
 			qt_gas01 = new FlxSprite();
@@ -987,7 +989,7 @@ class PlayState extends MusicBeatState
 			disableArrowIntro = true;
 
 		// Adding sawblades and pincers to every song so all songs can use them!
-		if (ClientPrefs.flashing)
+		if (ClientPrefs.flashing && SONG.song.toLowerCase() == "termination")
 		{
 			hazardOverlayShit = new BGSprite('hazard/inhuman-port/alert-vignette');
 			hazardOverlayShit.setGraphicSize(FlxG.width, FlxG.height);
@@ -1001,73 +1003,78 @@ class PlayState extends MusicBeatState
 		}
 
 		// Alert!
-		kb_attack_alert = new FlxSprite();
-		kb_attack_alert.frames = Paths.getSparrowAtlas('hazard/qt-port/attack_alert_NEW');
-		kb_attack_alert.animation.addByPrefix('alert', 'kb_attack_animation_alert-single', 24, false);
-		kb_attack_alert.animation.addByPrefix('alertDOUBLE', 'kb_attack_animation_alert-double', 24, false);
-		kb_attack_alert.animation.addByPrefix('alertTRIPLE', 'kb_attack_animation_alert-triple', 24, false);
-		kb_attack_alert.animation.addByPrefix('alertQUAD', 'kb_attack_animation_alert-quad', 24, false);
-		kb_attack_alert.antialiasing = ClientPrefs.globalAntialiasing;
-		kb_attack_alert.setGraphicSize(Std.int(kb_attack_alert.width * 1.5));
-		kb_attack_alert.cameras = [camHUD];
-		kb_attack_alert.x = FlxG.width - 700;
-		kb_attack_alert.y = 205;
-		// kb_attack_alert.animation.play("alert"); //Placeholder, change this to start already hidden or whatever.
+		if (SONG.song.toLowerCase() == "termination") {
+		    kb_attack_alert = new FlxSprite();
+		    kb_attack_alert.frames = Paths.getSparrowAtlas('hazard/qt-port/attack_alert_NEW');
+		    kb_attack_alert.animation.addByPrefix('alert', 'kb_attack_animation_alert-single', 24, false);
+		    kb_attack_alert.animation.addByPrefix('alertDOUBLE', 'kb_attack_animation_alert-double', 24, false);
+		    kb_attack_alert.animation.addByPrefix('alertTRIPLE', 'kb_attack_animation_alert-triple', 24, false);
+		    kb_attack_alert.animation.addByPrefix('alertQUAD', 'kb_attack_animation_alert-quad', 24, false);
+		    kb_attack_alert.antialiasing = ClientPrefs.globalAntialiasing;
+		    kb_attack_alert.setGraphicSize(Std.int(kb_attack_alert.width * 1.5));
+		    kb_attack_alert.cameras = [camHUD];
+		    kb_attack_alert.x = FlxG.width - 700;
+		    kb_attack_alert.y = 205;
+		    // kb_attack_alert.animation.play("alert"); //Placeholder, change this to start already hidden or whatever.
 
-		// Saw that one coming!
-		kb_attack_saw = new FlxSprite();
-		kb_attack_saw.frames = Paths.getSparrowAtlas('hazard/qt-port/attackv6');
-		kb_attack_saw.animation.addByPrefix('fire', 'kb_attack_animation_fire', 24, false);
-		kb_attack_saw.animation.addByPrefix('prepare', 'kb_attack_animation_prepare', 24, false);
-		kb_attack_saw.setGraphicSize(Std.int(kb_attack_saw.width * 1.15));
-		kb_attack_saw.antialiasing = ClientPrefs.globalAntialiasing;
-		kb_attack_saw.setPosition(-860, 630);
+		    // Saw that one coming!
+		    kb_attack_saw = new FlxSprite();
+		    kb_attack_saw.frames = Paths.getSparrowAtlas('hazard/qt-port/attackv6');
+		    kb_attack_saw.animation.addByPrefix('fire', 'kb_attack_animation_fire', 24, false);
+		    kb_attack_saw.animation.addByPrefix('prepare', 'kb_attack_animation_prepare', 24, false);
+		    kb_attack_saw.setGraphicSize(Std.int(kb_attack_saw.width * 1.15));
+		    kb_attack_saw.antialiasing = ClientPrefs.globalAntialiasing;
+		    kb_attack_saw.setPosition(-860, 630);
+		}
 
 		sawbladeHits = 0;
 		tauntCounter = 0;
+		
+		if (SONG.song.toLowerCase() == "termination") {
+		    // Pincer shit for moving notes around for a little bit of trollin'
+		    pincer1 = new FlxSprite(0, 0).loadGraphic(Paths.image('hazard/qt-port/pincer-open')); // (sirox) just need to cache that shit, cuz devs are dumb and forgot
+		    pincer1.loadGraphic(Paths.image('hazard/qt-port/pincer-close'));
+		    pincer1.antialiasing = ClientPrefs.globalAntialiasing;
+		    pincer1.scrollFactor.set();
 
-		// Pincer shit for moving notes around for a little bit of trollin'
-		pincer1 = new FlxSprite(0, 0).loadGraphic(Paths.image('hazard/qt-port/pincer-close'));
-		pincer1.antialiasing = ClientPrefs.globalAntialiasing;
-		pincer1.scrollFactor.set();
+		    pincer2 = new FlxSprite(0, 0).loadGraphic(Paths.image('hazard/qt-port/pincer-close'));
+		    pincer2.antialiasing = ClientPrefs.globalAntialiasing;
+		    pincer2.scrollFactor.set();
 
-		pincer2 = new FlxSprite(0, 0).loadGraphic(Paths.image('hazard/qt-port/pincer-close'));
-		pincer2.antialiasing = ClientPrefs.globalAntialiasing;
-		pincer2.scrollFactor.set();
+		    pincer3 = new FlxSprite(0, 0).loadGraphic(Paths.image('hazard/qt-port/pincer-close'));
+		    pincer3.antialiasing = ClientPrefs.globalAntialiasing;
+		    pincer3.scrollFactor.set();
 
-		pincer3 = new FlxSprite(0, 0).loadGraphic(Paths.image('hazard/qt-port/pincer-close'));
-		pincer3.antialiasing = ClientPrefs.globalAntialiasing;
-		pincer3.scrollFactor.set();
+		    pincer4 = new FlxSprite(0, 0).loadGraphic(Paths.image('hazard/qt-port/pincer-close'));
+		    pincer4.antialiasing = ClientPrefs.globalAntialiasing;
+		    pincer4.scrollFactor.set();
 
-		pincer4 = new FlxSprite(0, 0).loadGraphic(Paths.image('hazard/qt-port/pincer-close'));
-		pincer4.antialiasing = ClientPrefs.globalAntialiasing;
-		pincer4.scrollFactor.set();
-
-		if (ClientPrefs.downScroll)
-		{
-			pincer4.angle = 270;
-			pincer3.angle = 270;
-			pincer2.angle = 270;
-			pincer1.angle = 270;
-			pincer1.offset.set(192, -75);
-			pincer2.offset.set(192, -75);
-			pincer3.offset.set(192, -75);
-			pincer4.offset.set(192, -75);
-		}
-		else
-		{
-			pincer4.angle = 90;
-			pincer3.angle = 90;
-			pincer2.angle = 90;
-			pincer1.angle = 90;
-			pincer1.offset.set(218, 240);
-			pincer2.offset.set(218, 240);
-			pincer3.offset.set(218, 240);
-			pincer4.offset.set(218, 240);
+		    if (ClientPrefs.downScroll)
+		    {
+			    pincer4.angle = 270;
+			    pincer3.angle = 270;
+			    pincer2.angle = 270;
+			    pincer1.angle = 270;
+			    pincer1.offset.set(192, -75);
+			    pincer2.offset.set(192, -75);
+			    pincer3.offset.set(192, -75);
+			    pincer4.offset.set(192, -75);
+		    }
+		    else
+		    {
+			    pincer4.angle = 90;
+			    pincer3.angle = 90;
+			    pincer2.angle = 90;
+			    pincer1.angle = 90;
+			    pincer1.offset.set(218, 240);
+			    pincer2.offset.set(218, 240);
+			    pincer3.offset.set(218, 240);
+			    pincer4.offset.set(218, 240);
+		    }
 		}
 
 		// For the 'alarm' effect. Only added if flashling lights is allowed and low quality is off.
-		if (ClientPrefs.flashing && !ClientPrefs.lowQuality)
+		if (ClientPrefs.flashing && !ClientPrefs.lowQuality && SONG.song.toLowerCase() == 'censory-overload')
 		{
 			hazardAlarmLeft = new BGSprite('hazard/inhuman-port/back-Gradient', -600, -480, 0.5, 0.5);
 			hazardAlarmLeft.setGraphicSize(Std.int(hazardAlarmLeft.width * 1.1));
@@ -1213,7 +1220,7 @@ class PlayState extends MusicBeatState
 		if (dad.curCharacter.startsWith('gf'))
 		{
 			dad.setPosition(GF_X, GF_Y);
-			gf.visible = false;
+			gf.alpha = 0.0001;
 		}
 
 		var file:String = Paths.json(songName + '/dialogue'); // Checks for json/Psych Engine dialogue
@@ -1434,7 +1441,20 @@ class PlayState extends MusicBeatState
 		doof.cameras = [camHUD];
 
 		#if android
-		addAndroidControls(DEFAULT);
+		switch (SONG.song.toLowerCase()) {
+			case 'termination':
+			    if (ClientPrefs.tauntHitbox) {
+		            addAndroidControls(DOUBLE);
+		        } else {
+			        addAndroidControls(DODGE);
+			    }
+			default:
+			    if (ClientPrefs.tauntHitbox) {
+		            addAndroidControls(TAUNT);
+		        } else {
+			        addAndroidControls(DEFAULT);
+			    }
+		}
 		#end
 
 		// if (SONG.song == 'South')
@@ -3077,6 +3097,7 @@ class PlayState extends MusicBeatState
 	var startedCountdown:Bool = false;
 	var canPause:Bool = true;
 	var limoSpeed:Float = 0;
+        var shit:Int = 0;
 
 	override public function update(elapsed:Float)
 	{
@@ -4621,8 +4642,8 @@ class PlayState extends MusicBeatState
 				// Change to glitch background
 				if (!ClientPrefs.lowQuality)
 				{
-					streetBGerror.visible = true;
-					streetBG.visible = false;
+					streetBGerror.alpha = 1.0;
+					streetBG.alpha = 0.0001;
 				}
 				FlxG.camera.shake(0.0078, 0.675);
 			// dadDrainHealth=0.0055; //Reducing health drain because fuck me that's a lot of notes!
@@ -4631,9 +4652,9 @@ class PlayState extends MusicBeatState
 			case 2:
 				if (!ClientPrefs.lowQuality)
 				{
-					streetBG.visible = false;
-					streetBGerror.visible = false;
-					streetFrontError.visible = true;
+					streetBG.alpha = 0.0001;
+					streetBGerror.alpha = 0.0001;
+					streetFrontError.alpha = 1.0;
 					CensoryOverload404();
 				}
 			case 0:
@@ -4642,8 +4663,8 @@ class PlayState extends MusicBeatState
 				// dadDrainHealth=0.013; //Reduced health drain compared to normal for forgivness (player may have hit a sawblade, or suffering from the nerves)
 				if (!ClientPrefs.lowQuality)
 				{
-					streetBG.visible = true;
-					streetFrontError.visible = false;
+					streetBG.alpha = 1.0;
+					streetFrontError.alpha = 0.0001;
 				}
 		}
 	}
