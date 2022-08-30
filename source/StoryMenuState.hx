@@ -333,7 +333,6 @@ class StoryMenuState extends MusicBeatState
 	}
 
 	var tweenDifficulty:FlxTween;
-	var lastImagePath:String;
 
 	function changeDifficulty(change:Int = 0):Void
 	{
@@ -344,22 +343,12 @@ class StoryMenuState extends MusicBeatState
 		if (curDifficulty >= CoolUtil.difficulties.length)
 			curDifficulty = 0;
 
-		/*var image:Dynamic = Paths.image('menudifficulties/' + Paths.formatToSongPath(CoolUtil.difficulties[curDifficulty]));
-                FT.trace(image.assetsKey, "image.assetsKey");
-		var newImagePath:String = '';
-		if (Std.isOfType(image, FlxGraphic))
-		{
-			var graphic:FlxGraphic = image;
-			newImagePath = graphic.assetsKey;
-		}
-		else
-			newImagePath = image;
+		var diff:String = CoolUtil.difficulties[curDifficulty];
+		var newImage:Dynamic = Paths.image('menudifficulties/' + Paths.formatToSongPath(CoolUtil.difficulties[curDifficulty]));
 
-		if (newImagePath != lastImagePath)
-		{*/
-			//sprDifficulty.loadGraphic(image); 
-                        sprDifficulty.loadGraphic(openfl.utils.Assets.getBitmapData('assets/images/menudifficulties/' + CoolUtil.difficulties[curDifficulty] + '.png')); // hope that this shit would work
-                        FT.trace('assets/images/menudifficulties/' + CoolUtil.difficulties[curDifficulty] + '.png', "diffshit"); 
+		if (sprDifficulty.graphic != newImage)
+		{
+			sprDifficulty.loadGraphic(newImage);
 			sprDifficulty.x = leftArrow.x + 60;
 			sprDifficulty.x += (308 - sprDifficulty.width) / 2;
 			sprDifficulty.alpha = 0;
@@ -367,15 +356,16 @@ class StoryMenuState extends MusicBeatState
 
 			if (tweenDifficulty != null)
 				tweenDifficulty.cancel();
+
 			tweenDifficulty = FlxTween.tween(sprDifficulty, {y: leftArrow.y + 15, alpha: 1}, 0.07, {
 				onComplete: function(twn:FlxTween)
 				{
 					tweenDifficulty = null;
 				}
 			});
-		//}
-		//lastImagePath = newImagePath;
-		lastDifficultyName = CoolUtil.difficulties[curDifficulty];
+		}
+
+		lastDifficultyName = diff;
 
 		#if !switch
 		intendedScore = Highscore.getWeekScore(WeekData.weeksList[curWeek], curDifficulty);
