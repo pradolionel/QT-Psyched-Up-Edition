@@ -1458,6 +1458,9 @@ class PlayState extends MusicBeatState
 		}
 		#end
 
+                preload('HURTnoteSplashes');
+                preload('noteSplashes');
+
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
 		// UI_camera.zoom = 1;
@@ -8291,4 +8294,12 @@ class PlayState extends MusicBeatState
 
 	var curLight:Int = 0;
 	var curLightEvent:Int = 0;
+
+        public function preload(graphic:String, ?lib:String) //preload assets
+	{
+		var newthing:FlxSprite = new FlxSprite(0,0).loadGraphic(Paths.image(graphic, lib, true));
+		newthing.alpha = 0.0001;
+		add(newthing);
+		remove(newthing);
+	}
 }
