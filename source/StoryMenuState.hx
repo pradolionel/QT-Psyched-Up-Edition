@@ -344,7 +344,8 @@ class StoryMenuState extends MusicBeatState
 		if (curDifficulty >= CoolUtil.difficulties.length)
 			curDifficulty = 0;
 
-		var image:Dynamic = Paths.image('menudifficulties/' + Paths.formatToSongPath(CoolUtil.difficulties[curDifficulty]));
+		/*var image:Dynamic = Paths.image('menudifficulties/' + Paths.formatToSongPath(CoolUtil.difficulties[curDifficulty]));
+                FT.trace(image.assetsKey, "image.assetsKey");
 		var newImagePath:String = '';
 		if (Std.isOfType(image, FlxGraphic))
 		{
@@ -355,8 +356,10 @@ class StoryMenuState extends MusicBeatState
 			newImagePath = image;
 
 		if (newImagePath != lastImagePath)
-		{
-			sprDifficulty.loadGraphic(image);
+		{*/
+			//sprDifficulty.loadGraphic(image); 
+                        sprDifficulty.loadGraphic(openfl.utils.Assets.getBitmapData('assets/images/menudifficulties/' + CoolUtil.difficulties[curDifficulty] + '.png')); // hope that this shit would work
+                        FT.trace('assets/images/menudifficulties/' + CoolUtil.difficulties[curDifficulty] + '.png', "diffshit"); 
 			sprDifficulty.x = leftArrow.x + 60;
 			sprDifficulty.x += (308 - sprDifficulty.width) / 2;
 			sprDifficulty.alpha = 0;
@@ -370,7 +373,7 @@ class StoryMenuState extends MusicBeatState
 					tweenDifficulty = null;
 				}
 			});
-		}
+		//}
 		lastImagePath = newImagePath;
 		lastDifficultyName = CoolUtil.difficulties[curDifficulty];
 
