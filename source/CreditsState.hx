@@ -97,7 +97,7 @@ class CreditsState extends MusicBeatState
 			[
 				'Sirox',
 				'sirox',
-				'Hitboxes Coder and Debugging',
+				'Hitboxes Coder and Debugging\nIcon by Merphi',
 				'https://youtube.com/channel/UCqp6FttWJlp67vHT8n-_uKw',
 				'4494E6'
 			],
