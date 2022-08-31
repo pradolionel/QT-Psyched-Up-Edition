@@ -101,6 +101,7 @@ class CreditsState extends MusicBeatState
 				'https://youtube.com/channel/UCqp6FttWJlp67vHT8n-_uKw',
 				'4494E6'
 			],
+			[''],
 			['Special Thanks'],
 			[
 				'ZackGamerz',
