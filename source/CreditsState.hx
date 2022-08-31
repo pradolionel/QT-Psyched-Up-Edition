@@ -91,14 +91,14 @@ class CreditsState extends MusicBeatState
 				'M.A. Jigsaw',
 				'jigsaw',
 				'Main Coder of this port\nIcon By JoNUTan#2972',
-				'link',
+				'https://youtube.com/channel/UC2Sk7vtPzOvbVzdVTWrribQ',
 				'444444'
 			],
 			[
 				'Sirox',
 				'sirox',
 				'Hitboxes Coder and Debugging',
-				'link',
+				'https://youtube.com/channel/UCqp6FttWJlp67vHT8n-_uKw',
 				'4494E6'
 			],
 			['Special Thanks'],
@@ -106,7 +106,7 @@ class CreditsState extends MusicBeatState
 				'ZackGamerz',
 				'zack',
 				'Fixed Shaders for the port',
-				'link',
+				'https://youtube.com/channel/UCbWNOpUvvruwi3pbYVC_yWQ',
 				'53E52C'
 			],
 			[''],
