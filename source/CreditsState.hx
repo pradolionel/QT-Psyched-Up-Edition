@@ -86,6 +86,30 @@ class CreditsState extends MusicBeatState
 
 		var pisspoop:Array<Array<String>> = [
 			// Name - Icon name - Description - Link - BG Color
+			['Android Port'],
+			[
+				'M.A. Jigsaw',
+				'jigsaw',
+				'Main Coder of this port\nIcon By JoNUTan#2972',
+				'link',
+				'444444'
+			],
+			[
+				'Sirox',
+				'sirox',
+				'Hitboxes Coder and Debugging',
+				'link',
+				'4494E6'
+			],
+			['Special Thanks'],
+			[
+				'ZackGamerz',
+				'zack',
+				'Fixed Shaders for the port',
+				'link',
+				'53E52C'
+			],
+			[''],
 			['QT Mod Team'],
 			[
 				'Hazard24',
@@ -101,7 +125,6 @@ class CreditsState extends MusicBeatState
 				'https://twitter.com/CountNightshade',
 				'9930BB'
 			],
-			[''],
 			[''],
 			['Psych Engine Team'],
 			[
