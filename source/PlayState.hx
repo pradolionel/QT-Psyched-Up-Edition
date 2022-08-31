@@ -1454,7 +1454,7 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
-			if (ClientPrefs.tauntHitbox)
+			if (ClientPrefs.tauntHitbox && SONG.song.toLowerCase() != "interlope")
 				addAndroidControls(TAUNT);
 			else
 				addAndroidControls(DEFAULT);
