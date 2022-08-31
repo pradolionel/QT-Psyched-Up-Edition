@@ -90,7 +90,7 @@ class CreditsState extends MusicBeatState
 			[
 				'M.A. Jigsaw',
 				'jigsaw',
-				'Main Coder of this port\nIcon By JoNUTan#2972',
+				'Main Coder of this port\nIcon By JoNUTan',
 				'https://youtube.com/channel/UC2Sk7vtPzOvbVzdVTWrribQ',
 				'444444'
 			],
@@ -105,7 +105,7 @@ class CreditsState extends MusicBeatState
 			[
 				'ZackGamerz',
 				'zack',
-				'Fixed Shaders for this port\nIcon by @Serizyu',
+				'Fixed Shaders for this port\nIcon by Serizyu',
 				'https://youtube.com/channel/UCbWNOpUvvruwi3pbYVC_yWQ',
 				'53E52C'
 			],
