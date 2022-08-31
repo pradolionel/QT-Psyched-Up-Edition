@@ -10,6 +10,14 @@ import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.group.FlxSpriteGroup;
 
+enum Modes
+{
+	DEFAULT;
+	TAUNT;
+	DODGE;
+	DOUBLE;
+}
+
 /**
  * A zone with 4 hint's (A hitbox).
  * It's really easy to customize the layout.
@@ -161,12 +169,4 @@ class FlxHitbox extends FlxSpriteGroup
 		#end
 		return hint;
 	}
-}
-
-enum Modes
-{
-	DEFAULT;
-	TAUNT;
-	DODGE;
-	DOUBLE;
 }
