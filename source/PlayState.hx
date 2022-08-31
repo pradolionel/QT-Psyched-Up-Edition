@@ -1,5 +1,8 @@
 package;
 
+#if android
+import android.Hardware;
+#end
 import flixel.graphics.FlxGraphic;
 #if desktop
 import Discord.DiscordClient;
@@ -4159,6 +4162,10 @@ class PlayState extends MusicBeatState
 			kb_attack_saw.offset.set(1600, 0);
 			FlxG.camera.shake(0.001675, 0.6);
 			camHUD.shake(0.001675, 0.2);
+			#if android
+			if (ClientPrefs.vibration)
+				Hardware.vibrate(250);
+			#end
 			if (cpuControlled)
 				bfDodge();
 			// Slight delay for animation. Yeah I know I should be doing this using curStep and curBeat and what not, but I'm lazy -Haz
@@ -4553,6 +4560,10 @@ class PlayState extends MusicBeatState
 	{
 		FlxG.camera.shake(0.002, 1);
 		camHUD.shake(0.002, 1);
+		#if android
+		if (ClientPrefs.vibration)
+			Hardware.vibrate(1000);
+		#end
 		if (playerShit)
 		{
 			playerStrums.members[state].y += (ClientPrefs.downScroll ? -25 : 25);
@@ -4649,6 +4660,10 @@ class PlayState extends MusicBeatState
 					streetBG.alpha = 0.0001;
 				}
 				FlxG.camera.shake(0.0078, 0.675);
+				#if android
+				if (ClientPrefs.vibration)
+					Hardware.vibrate(275);
+				#end
 			// dadDrainHealth=0.0055; //Reducing health drain because fuck me that's a lot of notes!
 			// healthLossMultiplier=1.1375; //More forgiving because fuck me that's a lot of notes!
 			// healthGainMultiplier=1.125;

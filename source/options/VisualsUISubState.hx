@@ -49,6 +49,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		var option:Option = new Option('Hide HUD', 'If checked, hides most HUD elements.', 'hideHud', 'bool', false);
 		addOption(option);
 
+		#if android
 		var option:Option = new Option('Gradient Hitboxes', 'if checked, hitboxes would have gradient', 'gradientHitboxes', 'bool', false);
 		addOption(option);
 
@@ -59,6 +60,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		option.changeValue = 0.01;
 		option.decimals = 1;
 		addOption(option);
+		#end
 
 		var option:Option = new Option('Time Bar:', "What should the Time Bar display?", 'timeBarType', 'string', 'Time Left',
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);

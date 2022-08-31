@@ -56,12 +56,14 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			false); // Default value
 		addOption(option);
 
+		#if android
 		var option:Option = new Option('Hitbox Pose', 'if unchecked, hitboxes for mechanics would be at the top instead of bottom', 'mechsInputVariants',
 			'bool', true);
 		addOption(option);
 
 		var option:Option = new Option('Tount Hitbox', "if unchecked, hitbox for taunt won't be displayed", 'tauntHitbox', 'bool', true);
 		addOption(option);
+		#end
 
 		var option:Option = new Option('Middlescroll', 'If checked, your notes get centered.', 'middleScroll', 'bool', false);
 		addOption(option);
@@ -73,6 +75,11 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.changeValue = 0.1;
 		option.decimals = 1;
 		addOption(option);
+
+		#if android
+		var option:Option = new Option('Vibration', 'If unchecked, your device will no longer vibrate\nwhen a camera shakes', 'vibration', 'bool', true);
+		addOption(option);
+		#end
 
 		var option:Option = new Option('Ghost Tapping', "If checked, you won't get misses from pressing keys\nwhile there are no notes able to be hit.",
 			'ghostTapping', 'bool', true);

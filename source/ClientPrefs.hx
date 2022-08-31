@@ -36,11 +36,12 @@ class ClientPrefs
 	public static var noReset:Bool = false;
 	public static var healthBarAlpha:Float = 1;
 	public static var controllerMode:Bool = #if android true #else false #end;
-	public static var mechsInputVariants = true;
-	public static var render = 0;
-	public static var gradientHitboxes = false;
-	public static var hitboxOpacity = 0.3;
-	public static var tauntHitbox = true;
+	public static var mechsInputVariants:Bool = true;
+	public static var render:Int = 0;
+	public static var gradientHitboxes:Bool = false;
+	public static var hitboxOpacity:Float = 0.3;
+	public static var tauntHitbox:Bool = true;
+	public static var vibration:Bool = true;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative',
@@ -145,6 +146,7 @@ class ClientPrefs
 		FlxG.save.data.gradientHitboxes = gradientHitboxes;
 		FlxG.save.data.hitboxOpacity = hitboxOpacity;
 		FlxG.save.data.tauntHitbox = tauntHitbox;
+		FlxG.save.data.vibration = vibration;
 
 		FlxG.save.flush();
 
@@ -318,6 +320,10 @@ class ClientPrefs
 		if (FlxG.save.data.tauntHitbox != null)
 		{
 			tauntHitbox = FlxG.save.data.tauntHitbox;
+		}
+		if (FlxG.save.data.vibration != null)
+		{
+			vibration = FlxG.save.data.vibration;
 		}
 		if (FlxG.save.data.gameplaySettings != null)
 		{
