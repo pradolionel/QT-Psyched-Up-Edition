@@ -1078,7 +1078,7 @@ class PlayState extends MusicBeatState
 		}
 
 		// For the 'alarm' effect. Only added if flashling lights is allowed and low quality is off.
-		if (ClientPrefs.flashing && !ClientPrefs.lowQuality && SONG.song.toLowerCase() == 'censory-overload')
+		if (ClientPrefs.flashing && !ClientPrefs.lowQuality && (SONG.song.toLowerCase() == 'censory-overload' || SONG.song.toLowerCase() == 'termination'))
 		{
 			hazardAlarmLeft = new BGSprite('hazard/inhuman-port/back-Gradient', -600, -480, 0.5, 0.5);
 			hazardAlarmLeft.setGraphicSize(Std.int(hazardAlarmLeft.width * 1.1));
