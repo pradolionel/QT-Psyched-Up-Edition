@@ -145,7 +145,7 @@ class TiltshiftEffect extends Effect
 {
 	public var shader:Tiltshift;
 
-	public function new(blurAmount:Float, center:Float)
+	public function new(?blurAmount:Float = 1.0, ?center:Float = 1.0)
 	{
 		shader = new Tiltshift();
 		shader.bluramount.value = [blurAmount];
@@ -198,9 +198,10 @@ class Tiltshift extends FlxShader
 			*/
 		 
 		// I am hardcoding the constants like a jerk
+		// fuck whoever modified this like a fucking donkey with their feet as a brain. Im modifying this now. -zack
 			
-		uniform float bluramount  = 1.0;
-		uniform float center      = 1.0;
+		uniform float bluramount;
+		uniform float center;
 		const float stepSize    = 0.004;
 		const float steps       = 3.0;
 		 
@@ -276,12 +277,13 @@ class GrainEffect extends Effect
 {
 	public var shader:Grain;
 
-	public function new(grainsize, lumamount, lockAlpha)
+	public function new(?grainsize:Float = 1.6, ?lumamount:Float = 1.0, ?lockAlpha:Bool = false)
 	{
 		shader = new Grain();
 		shader.lumamount.value = [lumamount];
 		shader.grainsize.value = [grainsize];
 		shader.lockAlpha.value = [lockAlpha];
+		shader.coloramount.value = [0.6];
 		shader.uTime.value = [FlxG.random.float(0, 8)];
 		PlayState.instance.shaderUpdates.push(update);
 	}
@@ -319,15 +321,15 @@ class Grain extends FlxShader
 		const float permTexUnit = 1.0/256.0;        // Perm texture texel-size
 		const float permTexUnitHalf = 0.5/256.0;    // Half perm texture texel-size
 
-		float width = openfl_TextureSize.x;
-		float height = openfl_TextureSize.y;
+		float width = 0.0;
+		float height = 0.0;
 
 		const float grainamount = 0.05; //grain amount
 		bool colored = false; //colored noise?
-		uniform float coloramount = 0.6;
-		uniform float grainsize = 1.6; //grain particle size (1.5 - 2.5)
-		uniform float lumamount = 1.0; //
-	uniform bool lockAlpha = false;
+		uniform float coloramount;
+		uniform float grainsize; //grain particle size (1.5 - 2.5)
+		uniform float lumamount; //
+		uniform bool lockAlpha;
 
 		//a random texture generator, but you can also use a pre-computed perturbation texture
 	
@@ -409,11 +411,14 @@ class Grain extends FlxShader
 
 		void main()
 		{
+			width = openfl_TextureSize.x;
+			height = openfl_TextureSize.y;
+
 			vec2 texCoord = openfl_TextureCoordv.st;
 
 			vec3 rotOffset = vec3(1.425,3.892,5.835); //rotation offset values
 			vec2 rotCoordsR = coordRot(texCoord, uTime + rotOffset.x);
-			vec3 noise = vec3(pnoise3D(vec3(rotCoordsR*vec2(width/grainsize,height/grainsize),0.0)));
+			vec3 noise = vec3(pnoise3D(vec3(rotCoordsR*vec2(width/grainsize,height/grainsize),0.0)));			
 
 			if (colored)
 			{
