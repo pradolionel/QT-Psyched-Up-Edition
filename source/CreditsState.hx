@@ -105,7 +105,7 @@ class CreditsState extends MusicBeatState
 			[
 				'ZackGamerz',
 				'zack',
-				'Fixed Shaders for the port',
+				'Fixed Shaders for this port\nIcon by @Serizyu',
 				'https://youtube.com/channel/UCbWNOpUvvruwi3pbYVC_yWQ',
 				'53E52C'
 			],
