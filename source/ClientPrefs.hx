@@ -13,7 +13,7 @@ class ClientPrefs
 	public static var qtSkipCutscene:Bool = false; // Because the cutscene caused problems in the original mod. This is here in case it causes problems still.
 	public static var qtBonk:Bool = false; // Switches the sawblade sound back to the original placeholder I was using because the Bonk is fucking hilarious.
 	public static var hurtNoteAlpha:Float = 0.5; // Hurt notes transparency. Useful to allow your brain to focus on the more opaque, non-hurt notes.
-	public static var noShaders:Bool = true; // V2.2 added shaders to Interlope, however these shaders cause crashes. As a result, they now start disabled in the hotfix update.
+	public static var noShaders:Bool = false; // (sirox) thanks to zacksGamerz for fixing shaders, now no need in disabling them
 
 	public static var downScroll:Bool = false;
 	public static var middleScroll:Bool = false;
