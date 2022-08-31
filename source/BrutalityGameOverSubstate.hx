@@ -126,6 +126,11 @@ class BrutalityGameOverSubstate extends MusicBeatSubstate
 		FlxG.sound.play(Paths.sound(deathSoundName));
 		Conductor.changeBPM(115);
 
+                #if android
+		addVirtualPad(NONE, A_B);
+		addPadCamera();
+		#end
+
 		new FlxTimer().start(2, function(tmr:FlxTimer)
 		{
 			FlxG.sound.playMusic(Paths.music(loopSoundName), 0);
