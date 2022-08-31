@@ -53,7 +53,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 			'If checked, disables shaders from working.', // Description
 			'noShaders', // Save data variable name
 			'bool', // Variable type
-			true); // Default value
+			false); // Default value
 		addOption(option);
 
 		var option:Option = new Option('Anti-Aliasing', 'If unchecked, disables anti-aliasing, increases performance\nat the cost of sharper visuals.',
