@@ -46,7 +46,7 @@ jobs:
           haxelib --quiet install lime
           haxelib --quiet install openfl
           haxelib --quiet install flixel
-          haxelib --quiet --always run lime setup flixel
+          haxelib --quiet --never run lime setup flixel
           haxelib --quiet install flixel-ui
           haxelib --quiet install flixel-addons
           haxelib git linc_luajit https://github.com/MAJigsaw77/linc_luajit.git --quiet
