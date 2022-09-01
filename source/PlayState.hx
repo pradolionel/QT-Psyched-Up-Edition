@@ -1445,16 +1445,16 @@ class PlayState extends MusicBeatState
 		doof.cameras = [camHUD];
 
 		#if android
-		if (SONG.song.toLowerCase() == 'termination' || SONG.song.toLowerCase() == "tutorial")
+		if (SONG.dodgeEnabled)
 		{
-			if (ClientPrefs.tauntHitbox)
+			if (ClientPrefs.tauntHitbox && !inhumanSong)
 				addAndroidControls(DOUBLE);
 			else
 				addAndroidControls(DODGE);
 		}
 		else
 		{
-			if (ClientPrefs.tauntHitbox && SONG.song.toLowerCase() != "interlope")
+			if (ClientPrefs.tauntHitbox && !inhumanSong)
 				addAndroidControls(TAUNT);
 			else
 				addAndroidControls(DEFAULT);
