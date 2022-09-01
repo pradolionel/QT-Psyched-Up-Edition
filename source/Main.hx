@@ -23,8 +23,8 @@ class Main extends Sprite
 
 		ClientPrefs.loadDefaultKeys();
 
-		var stageWidth:Int = Lib.current.stage.stageWidth;
-		var stageHeight:Int = Lib.current.stage.stageHeight;
+		final stageWidth:Int = Lib.current.stage.stageWidth;
+		final stageHeight:Int = Lib.current.stage.stageHeight;
 
 		if (zoom == -1)
 		{
