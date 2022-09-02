@@ -46,7 +46,6 @@ class CreditsState extends MusicBeatState
 
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.setGraphicSize(FlxG.width, FlxG.height);
-		bg.updateHitbox();
 		add(bg);
 		bg.screenCenter();
 
