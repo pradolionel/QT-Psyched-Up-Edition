@@ -57,7 +57,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		option.scrollSpeed = 1.6;
 		option.minValue = 0.0;
 		option.maxValue = 1;
-		option.changeValue = 0.01;
+		option.changeValue = 0.1;
 		option.decimals = 1;
 		addOption(option);
 		#end
